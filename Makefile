@@ -5,7 +5,7 @@ init:
 	git submodule update --init --recursive
 
 coverage:
-	pytest --cov-report term --cov-report html --cov-report xml --cov=pysamplelib
+	pytest --cov-report term --cov-report html --cov-report xml --cov=pyprojectsort
 
 build:
 	pip install build

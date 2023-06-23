@@ -1,7 +1,7 @@
-Fizzbuzz
-========
+pyproject-sort
+==============
 
-FizzBuzz implementation.
+pyproject-sort implementation.
 
 .. toctree::
    :maxdepth: 2
@@ -10,6 +10,6 @@ FizzBuzz implementation.
 Code Documentation
 ------------------
 
-   .. automodule:: fizzbuzz
+   .. automodule:: main
       :members:
       :undoc-members:

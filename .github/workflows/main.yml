@@ -30,8 +30,6 @@ jobs:
         run: radon cc .
       - name: Check maintainability index
         run: radon mi .
-      - name: Check types
-        run: mypy .
       - name: Check security issues
         run: bandit --configfile=pyproject.toml --severity-level=medium --recursive .
       - name: Check performance issues
@@ -63,8 +61,6 @@ jobs:
           name: code-coverage-report
           path: docs/coverage
           retention-days: 5
-      - name: Run doctests
-        run: pytest --doctest-modules pysamplelib
 
   build-docs:
     runs-on: ${{ matrix.os }}

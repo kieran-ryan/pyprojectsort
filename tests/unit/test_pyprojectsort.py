@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-import pysamplelib
+import pyprojectsort
 
 
 def test_package():
     """Package top-level contains version information."""
-    assert "__version__" in pysamplelib.__all__
+    assert "__version__" in pyprojectsort.__all__

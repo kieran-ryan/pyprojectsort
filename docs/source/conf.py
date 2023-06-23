@@ -10,7 +10,7 @@ import tomli as tomllib
 # -- Path setup --------------------------------------------------------------
 
 repository_base_dir = pathlib.Path(__file__).parents[2]
-source_base_dir = repository_base_dir / "pysamplelib"
+source_base_dir = repository_base_dir / "pyprojectsort"
 
 sys.path.insert(0, str(source_base_dir))
 

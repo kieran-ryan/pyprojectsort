@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: testpypi
-      url: https://test.pypi.org/project/pysamplelib
+      url: https://test.pypi.org/project/pyprojectsort
     permissions:
       id-token: write
     steps:

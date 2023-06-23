@@ -1,10 +1,14 @@
 [build-system]
 build-backend = "flit.buildapi"
-requires = ["flit"]
+requires = [
+    "flit",
+]
 
 [project]
-authors = [{ name = "Kieran Ryan" }]
-name = "pysamplelib"
+authors = [
+    { name = "Kieran Ryan" },
+]
+name = "pyprojectsort"
 description = "A sample Python package."
 readme = "README.md"
 classifiers = [
@@ -16,7 +20,16 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
 ]
-dynamic = ["version"]
+dependencies = [
+    "tomli==2.0.1",
+    "tomli-w==1.0.0",
+]
+dynamic = [
+    "version",
+]
+
+[project.scripts]
+pyprojectsort = "pyprojectsort:main"
 
 [project.urls]
 Documentation = "https://kieran-ryan.github.io/python-package-template/"
@@ -24,10 +37,13 @@ Source = "https://github.com/kieran-ryan/python-package-template"
 Tracker = "https://github.com/kieran-ryan/python-package-template/issues"
 
 [tool.flit.module]
-name = "pysamplelib"
+name = "pyprojectsort"
 
 [tool.bandit]
-exclude_dirs = ["tests", "venv"]
+exclude_dirs = [
+    "tests",
+    "venv",
+]
 
 [tool.black]
 preview = true
@@ -37,10 +53,13 @@ directory = "docs/coverage"
 
 [tool.coverage.run]
 branch = true
-omit = ["*/tests/*", "*/venv/*"]
+omit = [
+    "*/tests/*",
+    "*/venv/*",
+]
 
 [tool.coverage.report]
-fail_under = 90.00
+fail_under = 90.0
 show_missing = true
 
 [tool.coverage.xml]
@@ -48,7 +67,7 @@ output = "docs/coverage/coverage.xml"
 
 [tool.isort]
 profile = "black"
-src_paths = "pysamplelib"
+src_paths = "pyprojectsort"
 
 [tool.radon]
 exclude = "tests/*,venv/*"
@@ -57,34 +76,46 @@ show_mi = true
 total_average = true
 
 [tool.ruff]
-select = ["ALL", "I002"]
+select = [
+    "ALL",
+    "I002",
+]
 ignore = [
-    "ANN",    # flake8-annotations
-    "ARG",    # flake8-unused-arguments
-    "DTZ005", # call-datetime-now-without-tzinfo
-    "D203",   # one-blank-line-before-class
-    "D213",   # multi-line-summary-second-line
-    "G004",   # logging-f-string
-    "INP001", # implicit-namespace-package
-    "S101",   # assert
-    "T201",   # sys-version-info0-eq3
+    "ANN",
+    "ARG",
+    "DTZ005",
+    "D203",
+    "D213",
+    "G004",
+    "INP001",
+    "S101",
+    "T201",
 ]
 
 [tool.ruff.isort]
-required-imports = ["from __future__ import annotations"]
+required-imports = [
+    "from __future__ import annotations",
+]
 
 [tool.ruff.pydocstyle]
 convention = "google"
 
 [tool.mypy]
-mypy_path = "pysamplelib"
+mypy_path = "pyprojectsort"
 files = "."
 exclude = "__init__.py|setup.py|docs|tests|venv"
 
 [tool.pylint]
 recursive = true
-ignore = ["docs", "tests", "venv"]
+ignore = [
+    "docs",
+    "tests",
+    "venv",
+]
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules -rA --verbose"
-testpaths = ["pysamplelib", "tests"]
+testpaths = [
+    "pyprojectsort",
+    "tests",
+]

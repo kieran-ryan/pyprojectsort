@@ -10,7 +10,7 @@ Table Of Contents
    :maxdepth: 2
    :caption: Contents:
 
-   fizzbuzz
+   main
    version
 
 Indices and tables

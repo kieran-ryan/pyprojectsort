@@ -1,7 +1,6 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-
 ---
 
 <!-- Summary. -->
@@ -16,8 +15,8 @@ about: Create a report to help us improve
 
 ## Reproduction Steps
 
-```python
-import pysamplelib
+```console
+pyprojectsort
 ```
 
 ## System Information
