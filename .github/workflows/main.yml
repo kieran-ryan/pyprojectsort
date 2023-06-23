@@ -64,7 +64,7 @@ jobs:
           path: docs/coverage
           retention-days: 5
       - name: Run doctests
-        run: pytest --doctest-modules pysamplelib
+        run: pytest --doctest-modules pyprojectsort
 
   build-docs:
     runs-on: ${{ matrix.os }}
