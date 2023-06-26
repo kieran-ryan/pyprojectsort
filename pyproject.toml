@@ -9,7 +9,7 @@ authors = [
     { name = "Kieran Ryan" },
 ]
 name = "pyprojectsort"
-description = "A sample Python package."
+description = "Autoformatter for pyproject.toml files"
 readme = "README.md"
 classifiers = [
     "License :: OSI Approved :: MIT License",

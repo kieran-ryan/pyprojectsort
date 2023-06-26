@@ -8,18 +8,20 @@
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 ![Pipeline status](https://github.com/kieran-ryan/python-package-template/actions/workflows/main.yml/badge.svg)
 
-Python package for sorting pyproject toml files.
+Autoformatter for pyproject.toml files.
+
+Ensures pyproject.toml files are consistently formatted; preventing merge request conflicts, reducing time spent manually formatting; and maintaining a cleaner git history and readability.
 
 ## Features
 
-- Alphabetically sorts pyproject toml section names
+- Alphabetically sorts pyproject.toml by parent section name
 
 ## Installation
 
 `pyprojectsort` is available via Test PyPI (via [Platform Wheels](https://packaging.python.org/guides/distributing-packages-using-setuptools/#platform-wheels)):
 
-```
-pip install --index-url https://test.pypi.org/simple/ pyprojectsort
+```console
+pip install pyprojectsort
 ```
 
 ## Examples

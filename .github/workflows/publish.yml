@@ -1,9 +1,11 @@
 name: Publish Python 🐍 distributions 📦 to PyPI
 
-on: [release]
+on:
+  release:
+    types: [published]
 
 jobs:
-  pypi-publish:
+  test-pypi-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
     runs-on: ubuntu-latest
     environment:
@@ -24,4 +26,26 @@ jobs:
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+
+  pypi-publish:
+    name: Build and publish Python 🐍 distributions 📦 to PyPI
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/pyprojectsort
+    permissions:
+      id-token: write
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - uses: actions/checkout@v2
+      - name: Build package
+        run: make build
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
           skip-existing: true
