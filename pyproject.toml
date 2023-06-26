@@ -29,7 +29,7 @@ dynamic = [
 ]
 
 [project.scripts]
-pyprojectsort = "pyprojectsort:main"
+pyprojectsort = "pyprojectsort.main:main"
 
 [project.urls]
 Documentation = "https://kieran-ryan.github.io/python-package-template/"

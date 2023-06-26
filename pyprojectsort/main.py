@@ -26,5 +26,7 @@ data_dict = {i: pyproject_toml[i] for i in sections_sorted}
 with pathlib.Path("pyproject.toml").open("wb") as f:
     tomli_w.dump(data_dict, f)
 
-if __name__ == "__main__":
+
+def main():
+    """Run application."""
     reformat_pyproject(pyproject_toml)
