@@ -1,4 +1,4 @@
-"""pyproject-sort unit tests."""
+"""pyprojectsort unit tests."""
 
 from __future__ import annotations
 

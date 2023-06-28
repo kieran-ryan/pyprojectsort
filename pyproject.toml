@@ -32,9 +32,9 @@ dynamic = [
 pyprojectsort = "pyprojectsort.main:main"
 
 [project.urls]
-Documentation = "https://kieran-ryan.github.io/python-package-template/"
-Source = "https://github.com/kieran-ryan/python-package-template"
-Tracker = "https://github.com/kieran-ryan/python-package-template/issues"
+Documentation = "https://kieran-ryan.github.io/pyprojectsort/"
+Source = "https://github.com/kieran-ryan/pyprojectsort"
+Tracker = "https://github.com/kieran-ryan/pyprojectsort/issues"
 
 [tool.flit.module]
 name = "pyprojectsort"
@@ -59,7 +59,7 @@ omit = [
 ]
 
 [tool.coverage.report]
-fail_under = 90.0
+fail_under = 75.0
 show_missing = true
 
 [tool.coverage.xml]

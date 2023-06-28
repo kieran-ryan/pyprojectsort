@@ -1,7 +1,7 @@
-pyproject-sort
-==============
+pyprojectsort
+=============
 
-pyproject-sort implementation.
+pyprojectsort implementation.
 
 .. toctree::
    :maxdepth: 2
