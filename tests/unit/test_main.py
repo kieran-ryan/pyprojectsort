@@ -1,4 +1,4 @@
-"""pyproject-sort unit tests."""
+"""pyprojectsort unit tests."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ def test_reformat_pyproject():
     pyproject = {
         "project": {"name": "pyprojectsort"},
         "build-system": {"name": "flit"},
+        "tool.pylint": {"ignore": ["docs", "tests", "venv"]},
         "tool.black": {"line_length": 88},
     }
 
@@ -18,5 +19,6 @@ def test_reformat_pyproject():
         "build-system": {"name": "flit"},
         "project": {"name": "pyprojectsort"},
         "tool.black": {"line_length": 88},
+        "tool.pylint": {"ignore": ["docs", "tests", "venv"]},
     }
     assert reformat_pyproject(pyproject) == sorted_pyproject

@@ -1,4 +1,4 @@
-"""pyproject-sort implementation."""
+"""pyprojectsort implementation."""
 from __future__ import annotations
 
 import pathlib
@@ -16,17 +16,18 @@ project_metadata = {
 
 def reformat_pyproject(pyproject: dict) -> dict:
     """Reformat pyproject toml file."""
-    sections_sorted = sorted(pyproject)
-    return {i: pyproject[i] for i in sections_sorted}
-
-
-sections_sorted = sorted(pyproject_toml)
-data_dict = {i: pyproject_toml[i] for i in sections_sorted}
-
-with pathlib.Path("pyproject.toml").open("wb") as f:
-    tomli_w.dump(data_dict, f)
+    if isinstance(pyproject, dict):
+        return {
+            key: reformat_pyproject(value)
+            for key, value in sorted(pyproject.items(), key=lambda item: item[0])
+        }
+    if isinstance(pyproject, list):
+        return [reformat_pyproject(item) for item in pyproject]
+    return pyproject
 
 
 def main():
     """Run application."""
-    reformat_pyproject(pyproject_toml)
+    data_dict = reformat_pyproject(pyproject_toml)
+    with pathlib.Path("pyproject.toml").open("wb") as f:
+        tomli_w.dump(data_dict, f)
