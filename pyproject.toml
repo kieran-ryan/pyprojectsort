@@ -103,7 +103,7 @@ convention = "google"
 [tool.mypy]
 mypy_path = "pyprojectsort"
 files = "."
-exclude = "__init__.py|setup.py|docs|tests|venv"
+exclude = "__init__.py|docs|tests|venv"
 
 [tool.pylint]
 recursive = true

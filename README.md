@@ -17,6 +17,7 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
 - Alphabetically sorts pyproject.toml by:
   - section
   - section key
+  - list value
 - Reformats pyproject.toml to a standardised style
 
 ## Installation
@@ -32,6 +33,13 @@ pip install pyprojectsort
 With the following `pyproject.toml` contained inside a directory:
 
 ```toml
+[tool.ruff]
+ignore = [
+    "G004",
+"T201",
+    "ANN",
+]
+
 [project]
 name = "pyprojectsort"
 
@@ -67,6 +75,13 @@ exclude = "tests/*,venv/*"
 show_complexity = true
 show_mi = true
 total_average = true
+
+[tool.ruff]
+ignore = [
+    "ANN",
+    "G004",
+    "T201",
+]
 ```
 
 ## License
