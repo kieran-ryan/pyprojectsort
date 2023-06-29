@@ -22,7 +22,7 @@ def reformat_pyproject(pyproject: dict) -> dict:
             for key, value in sorted(pyproject.items(), key=lambda item: item[0])
         }
     if isinstance(pyproject, list):
-        return [reformat_pyproject(item) for item in pyproject]
+        return sorted(reformat_pyproject(item) for item in pyproject)
     return pyproject
 
 
