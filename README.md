@@ -54,7 +54,7 @@ build-backend = "flit.buildapi"
 requires = ["flit"]
 ```
 
-Run the package from within the directory of the pyproject toml file as follows:
+Run the package from within the directory of the pyproject toml file:
 
 ```console
 pyprojectsort
@@ -82,6 +82,12 @@ ignore = [
     "G004",
     "T201",
 ]
+```
+
+The path to the pyproject toml file can also be specified from the command line:
+
+```console
+pyprojectsort ../pyproject.toml
 ```
 
 ## License
