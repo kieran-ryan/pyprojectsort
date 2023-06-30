@@ -45,9 +45,6 @@ exclude_dirs = [
     "venv",
 ]
 
-[tool.black]
-preview = true
-
 [tool.coverage.html]
 directory = "docs/coverage"
 
