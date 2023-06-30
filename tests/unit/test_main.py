@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import pathlib
+import sys
 import unittest.mock
+from io import StringIO
 
 import pytest
 
+from pyprojectsort import __version__
 from pyprojectsort.main import _read_cli, _read_config_file, main, reformat_pyproject
 
 
@@ -16,17 +19,28 @@ def test_default_filename():
 
 
 def test_version():
-    """Check expected default pyproject filename."""
+    """Program successfully displays package version and exits."""
+    captured_output = StringIO()
+    sys.stdout = captured_output
     with pytest.raises(SystemExit) as version:
         _read_cli(["--version"])
+    sys.stdout = sys.__stdout__
     assert version.value.code == 0
+    assert captured_output.getvalue().strip("\n") == __version__
 
 
 def test_invalid_config_file_path():
     """SystemExit raised if config file path does not exist."""
+    captured_output = StringIO()
+    sys.stdout = captured_output
     with pytest.raises(SystemExit) as invalid_config:
         _read_config_file(pathlib.Path("test_data.toml"))
+    sys.stdout = sys.__stdout__
     assert invalid_config.value.code == 1
+    assert (
+        captured_output.getvalue().strip("\n")
+        == "No pyproject.toml detected at path: 'test_data.toml'"
+    )
 
 
 @unittest.mock.patch("pathlib.Path.is_file")
