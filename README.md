@@ -90,6 +90,18 @@ The path to the pyproject toml file can also be specified from the command line:
 pyprojectsort ../pyproject.toml
 ```
 
+### Check formatting
+
+To check whether formatting would be applied to your file you may use the **--check** option.
+
+```console
+pyprojectsort --check
+```
+
+In case the file would be reformatted you get the output message ```'{file_path}' would be reformatted``` and the program terminates with exit code 1.
+
+If the given file is in a standardised style you get the output message ```'{file_path}' would be left unchanged``` and the program terminates successfully.
+
 ## License
 
 `pyprojectsort` is licensed under the [MIT License](https://opensource.org/licenses/MIT)
