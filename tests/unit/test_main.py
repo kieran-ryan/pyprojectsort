@@ -11,11 +11,11 @@ import pytest
 
 from pyprojectsort import __version__
 from pyprojectsort.main import (
+    _check_format_needed,
     _read_cli,
     _read_config_file,
     main,
     reformat_pyproject,
-    _check_format_needed,
 )
 
 
@@ -90,7 +90,12 @@ def test_reformat_pyproject():
 class TestArgs:
     """Test class for command line arguments."""
 
-    def __init__(self, file: str = "test_data.toml", check: bool = None):
+    def __init__(
+        self,
+        file: str = "test_data.toml",
+        check: bool = None,  # noqa: FBT001
+    ):
+        """Initialise test data arguments."""
         self.file = file
         self.check = check
 
