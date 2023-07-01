@@ -27,6 +27,14 @@ def _read_cli(args: list) -> argparse.Namespace:
         version=__version__,
         help="show package version and exit",
     )
+    parser.add_argument(
+        "--check",
+        help=(
+            "Don't write the files back, just return the status. Return code 0 means"
+            " nothing would change. Return code 1 means the file would be reformatted"
+        ),
+        action="store_true",
+    )
     return parser.parse_args(args)
 
 
@@ -57,6 +65,11 @@ def reformat_pyproject(pyproject: dict | list) -> dict:
     return pyproject
 
 
+def _check_format_needed(original: dict, reformatted: dict) -> bool:
+    """Check if there are any differences between original and reformatted."""
+    return original != reformatted
+
+
 def _save_pyproject(file: pathlib.Path, pyproject: dict) -> None:
     """Write changes to pyproject.toml."""
     with file.open("wb") as f:
@@ -70,7 +83,16 @@ def main() -> None:
     pyproject_toml = _parse_pyproject_toml(pyproject_file)
     reformatted_pyproject = reformat_pyproject(pyproject_toml)
 
-    will_reformat = pyproject_toml != reformatted_pyproject
+    will_reformat = _check_format_needed(pyproject_toml, reformatted_pyproject)
+
+    if args.check:
+        if will_reformat:
+            print(f"'{args.file}' would be reformatted")
+            sys.exit(1)
+        else:
+            print(f"'{args.file}' would be left unchanged")
+            return
+
     if will_reformat:
         _save_pyproject(pyproject_file, reformatted_pyproject)
         print(f"Reformatted '{args.file}'")
