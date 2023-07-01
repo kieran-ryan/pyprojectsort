@@ -14,7 +14,7 @@ from pyprojectsort import __version__
 DEFAULT_CONFIG = "pyproject.toml"
 
 
-def _read_cli(args: list):
+def _read_cli(args: list) -> argparse.Namespace:
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(
         prog="pyprojectsort",
@@ -30,7 +30,7 @@ def _read_cli(args: list):
     return parser.parse_args(args)
 
 
-def _read_config_file(config: pathlib.Path):
+def _read_config_file(config: pathlib.Path) -> pathlib.Path:
     """Check configuration file exists."""
     if not config.is_file():
         print(f"No pyproject.toml detected at path: '{config}'")
@@ -45,7 +45,7 @@ def _parse_pyproject_toml(file: pathlib.Path) -> dict[str, Any]:
     return {k.replace("--", "").replace("-", "_"): v for k, v in pyproject_toml.items()}
 
 
-def reformat_pyproject(pyproject: dict) -> dict:
+def reformat_pyproject(pyproject: dict | list) -> dict:
     """Reformat pyproject toml file."""
     if isinstance(pyproject, dict):
         return {
@@ -57,16 +57,27 @@ def reformat_pyproject(pyproject: dict) -> dict:
     return pyproject
 
 
-def _save_pyproject(file, pyproject) -> None:
+def _save_pyproject(file: pathlib.Path, pyproject: dict) -> None:
     """Write changes to pyproject.toml."""
     with file.open("wb") as f:
         tomli_w.dump(pyproject, f)
 
 
-def main():
+def main() -> None:
     """Run application."""
     args = _read_cli(sys.argv[1:])
     pyproject_file = _read_config_file(pathlib.Path(args.file))
     pyproject_toml = _parse_pyproject_toml(pyproject_file)
     reformatted_pyproject = reformat_pyproject(pyproject_toml)
-    _save_pyproject(pyproject_file, reformatted_pyproject)
+
+    will_reformat = pyproject_toml != reformatted_pyproject
+    if will_reformat:
+        _save_pyproject(pyproject_file, reformatted_pyproject)
+        print(f"Reformatted '{args.file}'")
+        sys.exit(1)
+
+    print(f"'{args.file}' left unchanged")
+
+
+if __name__ == "__main__":
+    main()
