@@ -98,9 +98,9 @@ To check whether formatting would be applied to your file you may use the **--ch
 pyprojectsort --check
 ```
 
-In case the file would be reformatted you get the output message ```'{file_path}' would be reformatted``` and the program terminates with exit code 1.
+When the file would be reformatted, the output message `'{file_path}' would be reformatted` displays and the program terminates with exit code 1.
 
-If the given file is in a standardised style you get the output message ```'{file_path}' would be left unchanged``` and the program terminates successfully.
+If the given file matches the style of `pyprojectsort`, the output message `'{file_path}' would be left unchanged` displays and the program terminates successfully.
 
 ## License
 

@@ -10,7 +10,7 @@ from io import StringIO
 import pytest
 
 from pyprojectsort import __version__
-from pyprojectsort.main import _read_cli, _read_config_file, main, reformat_pyproject
+from pyprojectsort.main import _read_cli, _read_config_file, main, reformat_pyproject, _check_format_needed
 
 
 class OutputCapture:
@@ -156,12 +156,13 @@ def test_check_option_reformat_needed(
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {}
     reformat_pyproject.return_value = {"change": 1}
+
     with pytest.raises(SystemExit) as pytest_wrapped_e:
         with OutputCapture() as output:
             main()
 
-        assert output.text == f"'{args.file}' would be reformatted"
-        assert pytest_wrapped_e.value == 1
+    assert output.text == f"'{args.file}' would be reformatted"
+    assert pytest_wrapped_e.value.code == 1
 
 
 @unittest.mock.patch("pyprojectsort.main.reformat_pyproject")
@@ -180,8 +181,19 @@ def test_check_option_reformat_not_needed(
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {"unchanged": 1}
     reformat_pyproject.return_value = {"unchanged": 1}
+
     with OutputCapture() as output:
         main()
 
     assert output.text == f"'{args.file}' would be left unchanged"
 
+
+@pytest.mark.parametrize(
+    "original,reformatted,expected_result",
+    [
+        ({"unchanged": 1}, {"unchanged": 1}, False),
+        ({"should_be_changed": 1}, {"changed": 1}, True),
+    ]
+)
+def test_check_format_needed(original, reformatted, expected_result):
+    assert _check_format_needed(original, reformatted) == expected_result

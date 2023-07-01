@@ -27,7 +27,14 @@ def _read_cli(args: list) -> argparse.Namespace:
         version=__version__,
         help="show package version and exit",
     )
-    parser.add_argument("--check", help="show package version and exit", action='store_true', default=False)
+    parser.add_argument(
+        "--check",
+        help=(
+            "Don't write the files back, just return the status. Return code 0 means"
+            " nothing would change. Return code 1 means the file would be reformatted"
+        ),
+        action='store_true'
+    )
     return parser.parse_args(args)
 
 
@@ -59,7 +66,7 @@ def reformat_pyproject(pyproject: dict | list) -> dict:
 
 
 def _check_format_needed(original: dict, reformatted: dict) -> bool:
-    """Check if there are any differences between original and reformatted. """
+    """Check if there are any differences between original and reformatted."""
     return original != reformatted
 
 
