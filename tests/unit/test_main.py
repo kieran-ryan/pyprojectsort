@@ -60,7 +60,7 @@ def test_reformat_pyproject():
         "tool.black": {"line_length": 88},
     }
 
-    # TODO: Amend test to validate order
+    # TODO(@kieran-ryan): Amend test to validate order
     sorted_pyproject = {
         "build-system": {"name": "flit"},
         "project": {"name": "pyprojectsort"},

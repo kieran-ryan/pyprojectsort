@@ -83,10 +83,12 @@ ignore = [
     "DTZ005",
     "D203",
     "D213",
+    "FIX002",
     "G004",
     "INP001",
     "S101",
     "T201",
+    "TD003",
 ]
 
 [tool.ruff.isort]
