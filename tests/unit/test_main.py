@@ -168,13 +168,13 @@ def test_check_option_reformat_needed(
 @unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
 @unittest.mock.patch("pyprojectsort.main._read_config_file")
 @unittest.mock.patch("pyprojectsort.main._read_cli")
-def test_check_option(
+def test_check_option_reformat_not_needed(
     read_cli,
     read_config,
     parse_pyproject,
     reformat_pyproject
 ):
-    """Test --check option when reformat occurs."""
+    """Test --check option when reformat is not needed."""
     args = TestArgs(check=True)
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
@@ -183,5 +183,5 @@ def test_check_option(
     with OutputCapture() as output:
         main()
 
-    assert output.text == f"'{args.file}' be left unchanged"
+    assert output.text == f"'{args.file}' would be left unchanged"
 

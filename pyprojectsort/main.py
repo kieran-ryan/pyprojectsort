@@ -92,7 +92,3 @@ def main() -> None:
         sys.exit(1)
 
     print(f"'{args.file}' left unchanged")
-
-
-if __name__ == '__main__':
-    main()
