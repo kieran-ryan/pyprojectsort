@@ -13,6 +13,24 @@ from pyprojectsort import __version__
 from pyprojectsort.main import _read_cli, _read_config_file, main, reformat_pyproject
 
 
+class OutputCapture:
+    """Context manager to capture console output."""
+
+    def __init__(self) -> None:
+        """Initialise context manager."""
+        self.text = StringIO()
+
+    def __enter__(self):
+        """Enter context manager."""
+        sys.stdout = self.text
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_tb):
+        """Exit context manager."""
+        sys.stdout = sys.__stdout__
+        self.text = self.text.getvalue().strip("\n")
+
+
 def test_default_filename():
     """Check expected default pyproject filename."""
     assert _read_cli([]).file == "pyproject.toml"
@@ -20,27 +38,20 @@ def test_default_filename():
 
 def test_version():
     """Program successfully displays package version and exits."""
-    captured_output = StringIO()
-    sys.stdout = captured_output
-    with pytest.raises(SystemExit) as version:
+    with pytest.raises(SystemExit) as version, OutputCapture() as output:
         _read_cli(["--version"])
-    sys.stdout = sys.__stdout__
+
     assert version.value.code == 0
-    assert captured_output.getvalue().strip("\n") == __version__
+    assert output.text == __version__
 
 
 def test_invalid_config_file_path():
     """SystemExit raised if config file path does not exist."""
-    captured_output = StringIO()
-    sys.stdout = captured_output
-    with pytest.raises(SystemExit) as invalid_config:
+    with pytest.raises(SystemExit) as invalid_config, OutputCapture() as output:
         _read_config_file(pathlib.Path("test_data.toml"))
-    sys.stdout = sys.__stdout__
+
     assert invalid_config.value.code == 1
-    assert (
-        captured_output.getvalue().strip("\n")
-        == "No pyproject.toml detected at path: 'test_data.toml'"
-    )
+    assert output.text == "No pyproject.toml detected at path: 'test_data.toml'"
 
 
 @unittest.mock.patch("pathlib.Path.is_file")
@@ -81,16 +92,45 @@ class TestArgs:
 @unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
 @unittest.mock.patch("pyprojectsort.main._read_config_file")
 @unittest.mock.patch("pyprojectsort.main._read_cli")
-def test_main(
+def test_main_with_file_reformatted(
     read_cli,
     read_config,
     parse_pyproject,
     reformat_pyproject,
     save_pyproject,
 ):
-    """Test main application function."""
+    """Test file reformatted."""
+    read_cli.return_value = TestArgs()
+    read_config.return_value = pathlib.Path()
+    parse_pyproject.return_value = {}
+    reformat_pyproject.return_value = {"change": 1}
+
+    with pytest.raises(SystemExit) as reformatted, OutputCapture() as output:
+        main()
+
+    assert reformatted.value.code == 1
+    assert output.text == f"Reformatted '{TestArgs.file}'"
+
+
+@unittest.mock.patch("pyprojectsort.main._save_pyproject")
+@unittest.mock.patch("pyprojectsort.main.reformat_pyproject")
+@unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
+@unittest.mock.patch("pyprojectsort.main._read_config_file")
+@unittest.mock.patch("pyprojectsort.main._read_cli")
+def test_main_with_file_unchanged(
+    read_cli,
+    read_config,
+    parse_pyproject,
+    reformat_pyproject,
+    save_pyproject,
+):
+    """Test file left unchanged."""
     read_cli.return_value = TestArgs()
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {}
     reformat_pyproject.return_value = {}
-    main()
+
+    with OutputCapture() as output:
+        main()
+
+    assert output.text == f"'{TestArgs.file}' left unchanged"
