@@ -196,4 +196,5 @@ def test_check_option_reformat_not_needed(
     ]
 )
 def test_check_format_needed(original, reformatted, expected_result):
+    """Test _check_format_needed function with different test cases."""
     assert _check_format_needed(original, reformatted) == expected_result
