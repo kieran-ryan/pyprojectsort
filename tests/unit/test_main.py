@@ -84,7 +84,9 @@ def test_reformat_pyproject():
 class TestArgs:
     """Test class for command line arguments."""
 
-    file = "test_data.toml"
+    def __init__(self, file: str = "test_data.toml", check: bool = None):
+        self.file = file
+        self.check = check
 
 
 @unittest.mock.patch("pyprojectsort.main._save_pyproject")
@@ -100,7 +102,8 @@ def test_main_with_file_reformatted(
     save_pyproject,
 ):
     """Test file reformatted."""
-    read_cli.return_value = TestArgs()
+    args = TestArgs()
+    read_cli.return_value = args
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {}
     reformat_pyproject.return_value = {"change": 1}
@@ -109,7 +112,7 @@ def test_main_with_file_reformatted(
         main()
 
     assert reformatted.value.code == 1
-    assert output.text == f"Reformatted '{TestArgs.file}'"
+    assert output.text == f"Reformatted '{args.file}'"
 
 
 @unittest.mock.patch("pyprojectsort.main._save_pyproject")
@@ -125,7 +128,8 @@ def test_main_with_file_unchanged(
     save_pyproject,
 ):
     """Test file left unchanged."""
-    read_cli.return_value = TestArgs()
+    args = TestArgs()
+    read_cli.return_value = args
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {}
     reformat_pyproject.return_value = {}
@@ -133,4 +137,51 @@ def test_main_with_file_unchanged(
     with OutputCapture() as output:
         main()
 
-    assert output.text == f"'{TestArgs.file}' left unchanged"
+    assert output.text == f"'{args.file}' left unchanged"
+
+
+@unittest.mock.patch("pyprojectsort.main.reformat_pyproject")
+@unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
+@unittest.mock.patch("pyprojectsort.main._read_config_file")
+@unittest.mock.patch("pyprojectsort.main._read_cli")
+def test_check_option_reformat_needed(
+    read_cli,
+    read_config,
+    parse_pyproject,
+    reformat_pyproject
+):
+    """Test --check option when reformat occurs."""
+    args = TestArgs(check=True)
+    read_cli.return_value = args
+    read_config.return_value = pathlib.Path()
+    parse_pyproject.return_value = {}
+    reformat_pyproject.return_value = {"change": 1}
+    with pytest.raises(SystemExit) as pytest_wrapped_e:
+        with OutputCapture() as output:
+            main()
+
+        assert output.text == f"'{args.file}' would be reformatted"
+        assert pytest_wrapped_e.value == 1
+
+
+@unittest.mock.patch("pyprojectsort.main.reformat_pyproject")
+@unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
+@unittest.mock.patch("pyprojectsort.main._read_config_file")
+@unittest.mock.patch("pyprojectsort.main._read_cli")
+def test_check_option(
+    read_cli,
+    read_config,
+    parse_pyproject,
+    reformat_pyproject
+):
+    """Test --check option when reformat occurs."""
+    args = TestArgs(check=True)
+    read_cli.return_value = args
+    read_config.return_value = pathlib.Path()
+    parse_pyproject.return_value = {"unchanged": 1}
+    reformat_pyproject.return_value = {"unchanged": 1}
+    with OutputCapture() as output:
+        main()
+
+    assert output.text == f"'{args.file}' be left unchanged"
+
