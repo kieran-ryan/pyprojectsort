@@ -33,7 +33,7 @@ def _read_cli(args: list) -> argparse.Namespace:
             "Don't write the files back, just return the status. Return code 0 means"
             " nothing would change. Return code 1 means the file would be reformatted"
         ),
-        action='store_true'
+        action="store_true",
     )
     return parser.parse_args(args)
 

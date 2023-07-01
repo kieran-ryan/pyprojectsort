@@ -10,7 +10,13 @@ from io import StringIO
 import pytest
 
 from pyprojectsort import __version__
-from pyprojectsort.main import _read_cli, _read_config_file, main, reformat_pyproject, _check_format_needed
+from pyprojectsort.main import (
+    _read_cli,
+    _read_config_file,
+    main,
+    reformat_pyproject,
+    _check_format_needed,
+)
 
 
 class OutputCapture:
@@ -148,7 +154,7 @@ def test_check_option_reformat_needed(
     read_cli,
     read_config,
     parse_pyproject,
-    reformat_pyproject
+    reformat_pyproject,
 ):
     """Test --check option when reformat occurs."""
     args = TestArgs(check=True)
@@ -157,9 +163,8 @@ def test_check_option_reformat_needed(
     parse_pyproject.return_value = {}
     reformat_pyproject.return_value = {"change": 1}
 
-    with pytest.raises(SystemExit) as pytest_wrapped_e:
-        with OutputCapture() as output:
-            main()
+    with pytest.raises(SystemExit) as pytest_wrapped_e, OutputCapture() as output:
+        main()
 
     assert output.text == f"'{args.file}' would be reformatted"
     assert pytest_wrapped_e.value.code == 1
@@ -173,7 +178,7 @@ def test_check_option_reformat_not_needed(
     read_cli,
     read_config,
     parse_pyproject,
-    reformat_pyproject
+    reformat_pyproject,
 ):
     """Test --check option when reformat is not needed."""
     args = TestArgs(check=True)
@@ -189,11 +194,11 @@ def test_check_option_reformat_not_needed(
 
 
 @pytest.mark.parametrize(
-    "original,reformatted,expected_result",
+    ("original", "reformatted", "expected_result"),
     [
         ({"unchanged": 1}, {"unchanged": 1}, False),
         ({"should_be_changed": 1}, {"changed": 1}, True),
-    ]
+    ],
 )
 def test_check_format_needed(original, reformatted, expected_result):
     """Test _check_format_needed function with different test cases."""
