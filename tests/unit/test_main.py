@@ -77,7 +77,7 @@ def test_reformat_pyproject():
         "tool.black": {"line_length": 88},
     }
 
-    # TODO: Amend test to validate order
+    # TODO(@kieran-ryan): Amend test to validate order
     sorted_pyproject = {
         "build-system": {"name": "flit"},
         "project": {"name": "pyprojectsort"},
@@ -93,7 +93,7 @@ class TestArgs:
     def __init__(
         self,
         file: str = "test_data.toml",
-        check: bool = None,  # noqa: FBT001
+        check: bool | None = None,
     ):
         """Initialise test data arguments."""
         self.file = file
