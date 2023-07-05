@@ -19,6 +19,10 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
   - section key
   - list value
 - Reformats pyproject.toml to a standardised style
+  - Double quotations
+  - Trailing commas
+  - Line per value for list length above three
+    - or less with explicit trailing commas
 
 ## Installation
 
@@ -37,11 +41,11 @@ With the following `pyproject.toml` contained inside a directory:
 ignore = [
     "G004",
 "T201",
-    "ANN",
+    "ANN"
 ]
 
 [project]
-name = "pyprojectsort"
+name = 'pyprojectsort'
 
 [tool.radon]
 show_mi = true
