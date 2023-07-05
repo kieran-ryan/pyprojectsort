@@ -87,7 +87,7 @@ def test_reformat_pyproject():
     assert reformat_pyproject(pyproject) == sorted_pyproject
 
 
-class TestArgs:
+class CLIArgs:
     """Test class for command line arguments."""
 
     def __init__(
@@ -113,7 +113,7 @@ def test_main_with_file_reformatted(
     save_pyproject,
 ):
     """Test file reformatted."""
-    args = TestArgs()
+    args = CLIArgs()
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {}
@@ -139,7 +139,7 @@ def test_main_with_file_unchanged(
     save_pyproject,
 ):
     """Test file left unchanged."""
-    args = TestArgs()
+    args = CLIArgs()
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {}
@@ -162,7 +162,7 @@ def test_check_option_reformat_needed(
     reformat_pyproject,
 ):
     """Test --check option when reformat occurs."""
-    args = TestArgs(check=True)
+    args = CLIArgs(check=True)
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {}
@@ -186,7 +186,7 @@ def test_check_option_reformat_not_needed(
     reformat_pyproject,
 ):
     """Test --check option when reformat is not needed."""
-    args = TestArgs(check=True)
+    args = CLIArgs(check=True)
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = {"unchanged": 1}

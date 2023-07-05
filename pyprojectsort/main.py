@@ -9,7 +9,7 @@ from typing import Any
 import tomli as tomllib
 import tomli_w
 
-from pyprojectsort import __version__
+from . import __version__
 
 DEFAULT_CONFIG = "pyproject.toml"
 
