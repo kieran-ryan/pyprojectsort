@@ -108,7 +108,6 @@ ignore = [
 ]
 select = [
     "ALL",
-    "I002",
 ]
 
 [tool.ruff.isort]

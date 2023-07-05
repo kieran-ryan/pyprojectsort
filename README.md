@@ -19,11 +19,10 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
   - section key
   - list value
 - Reformats pyproject.toml to a standardised style
-  - Double quotations
-  - Trailing commas
-  - Line per value for list length above three
-    - or less with explicit trailing commas
-  - Indentation
+  - line per list value
+  - double quotations
+  - trailing commas
+  - indentation
 
 ## Installation
 
@@ -39,8 +38,7 @@ With the following `pyproject.toml` contained inside a directory:
 
 ```toml
 [tool.ruff]
-ignore = [
-    "G004",
+ignore = ["G004",
 "T201",
     "ANN"
 ]
@@ -70,7 +68,9 @@ The configuration will be reformatted as follows:
 ```toml
 [build-system]
 build-backend = "flit.buildapi"
-requires = ["flit"]
+requires = [
+    "flit",
+]
 
 [project]
 name = "pyprojectsort"
