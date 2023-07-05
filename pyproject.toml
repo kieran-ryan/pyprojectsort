@@ -8,12 +8,9 @@ requires = [
 authors = [
     { name = "Kieran Ryan" },
 ]
-name = "pyprojectsort"
-description = "Formatter for pyproject.toml files"
-readme = "README.md"
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX :: Linux",
@@ -21,12 +18,15 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 dependencies = [
-    "tomli==2.0.1",
     "tomli-w==1.0.0",
+    "tomli==2.0.1",
 ]
+description = "Formatter for pyproject.toml files"
 dynamic = [
     "version",
 ]
+name = "pyprojectsort"
+readme = "README.md"
 
 [project.scripts]
 pyprojectsort = "pyprojectsort.main:main"
@@ -35,9 +35,6 @@ pyprojectsort = "pyprojectsort.main:main"
 Documentation = "https://kieran-ryan.github.io/pyprojectsort/"
 Source = "https://github.com/kieran-ryan/pyprojectsort"
 Tracker = "https://github.com/kieran-ryan/pyprojectsort/issues"
-
-[tool.flit.module]
-name = "pyprojectsort"
 
 [tool.bandit]
 exclude_dirs = [
@@ -48,6 +45,10 @@ exclude_dirs = [
 [tool.coverage.html]
 directory = "docs/coverage"
 
+[tool.coverage.report]
+fail_under = 75.0
+show_missing = true
+
 [tool.coverage.run]
 branch = true
 omit = [
@@ -55,16 +56,35 @@ omit = [
     "*/venv/*",
 ]
 
-[tool.coverage.report]
-fail_under = 75.0
-show_missing = true
-
 [tool.coverage.xml]
 output = "docs/coverage/coverage.xml"
+
+[tool.flit.module]
+name = "pyprojectsort"
 
 [tool.isort]
 profile = "black"
 src_paths = "pyprojectsort"
+
+[tool.mypy]
+exclude = "__init__.py|docs|tests|venv"
+files = "."
+mypy_path = "pyprojectsort"
+
+[tool.pylint]
+ignore = [
+    "docs",
+    "tests",
+    "venv",
+]
+recursive = true
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules -rA --verbose"
+testpaths = [
+    "pyprojectsort",
+    "tests",
+]
 
 [tool.radon]
 exclude = "tests/*,venv/*"
@@ -73,22 +93,22 @@ show_mi = true
 total_average = true
 
 [tool.ruff]
-select = [
-    "ALL",
-    "I002",
-]
 ignore = [
     "ANN",
     "ARG",
-    "DTZ005",
     "D203",
     "D213",
+    "DTZ005",
     "FIX002",
     "G004",
     "INP001",
     "S101",
     "T201",
     "TD003",
+]
+select = [
+    "ALL",
+    "I002",
 ]
 
 [tool.ruff.isort]
@@ -98,23 +118,3 @@ required-imports = [
 
 [tool.ruff.pydocstyle]
 convention = "google"
-
-[tool.mypy]
-mypy_path = "pyprojectsort"
-files = "."
-exclude = "__init__.py|docs|tests|venv"
-
-[tool.pylint]
-recursive = true
-ignore = [
-    "docs",
-    "tests",
-    "venv",
-]
-
-[tool.pytest.ini_options]
-addopts = "--doctest-modules -rA --verbose"
-testpaths = [
-    "pyprojectsort",
-    "tests",
-]
