@@ -26,6 +26,8 @@ jobs:
         run: ruff .
       - name: Check Python formatting
         run: black . --check
+      - name: Check pyproject.toml formatting
+        run: pyprojectsort --check
       - name: Check cyclomatic complexity
         run: radon cc .
       - name: Check maintainability index

@@ -23,6 +23,7 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
   - Trailing commas
   - Line per value for list length above three
     - or less with explicit trailing commas
+  - Indentation
 
 ## Installation
 
