@@ -48,9 +48,8 @@ def _read_config_file(config: pathlib.Path) -> pathlib.Path:
 
 def _parse_pyproject_toml(file: pathlib.Path) -> dict[str, Any]:
     """Parse pyproject.toml file."""
-    with file.open("rb") as f:
-        pyproject_toml = tomllib.load(f)
-    return {k.replace("--", "").replace("-", "_"): v for k, v in pyproject_toml.items()}
+    with file.open("rb") as pyproject_file:
+        return tomllib.load(pyproject_file)
 
 
 def reformat_pyproject(pyproject: dict | list) -> dict:
@@ -72,8 +71,8 @@ def _check_format_needed(original: dict, reformatted: dict) -> bool:
 
 def _save_pyproject(file: pathlib.Path, pyproject: dict) -> None:
     """Write changes to pyproject.toml."""
-    with file.open("wb") as f:
-        tomli_w.dump(pyproject, f)
+    with file.open("wb") as pyproject_file:
+        tomli_w.dump(pyproject, pyproject_file)
 
 
 def main() -> None:
