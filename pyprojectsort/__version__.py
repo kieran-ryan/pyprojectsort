@@ -6,6 +6,6 @@ from __future__ import annotations
 
 MAJOR = 0
 MINOR = 2
-MICRO = 0
+MICRO = 1
 
 __version__ = f"{MAJOR}.{MINOR}.{MICRO}"
