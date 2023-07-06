@@ -1,0 +1,10 @@
+- id: pyprojectsort
+  name: pyprojectsort
+  description: "`pyprojectsort` is a formatter for pyproject.toml files"
+  entry: pyprojectsort
+  language: python
+  types: [toml]
+  args: []
+  pass_filenames: false
+  require_serial: true
+  additional_dependencies: []
