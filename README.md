@@ -1,8 +1,8 @@
 # pyprojectsort
 
-[![Release version](https://badge.fury.io/py/pyprojectsort.svg)](https://pypi.org/project/pyprojectsort/)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Python version](https://img.shields.io/badge/python-3.10-blue)
+[![image](https://badge.fury.io/py/pyprojectsort.svg)](https://pypi.org/project/pyprojectsort/)
+![image](https://img.shields.io/badge/license-MIT-blue)
+[![image](https://img.shields.io/pypi/pyversions/pyprojectsort.svg)](https://pypi.python.org/pypi/pyprojectsort)
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
@@ -30,6 +30,24 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
 
 ```console
 pip install pyprojectsort
+```
+
+### Using pyprojectsort with pre-commit
+
+To use as an automated git hook, add this to your `.pre-commit-config.yaml`:
+
+```yaml
+- repo: https://github.com/kieran-ryan/pyprojectsort
+  # pyprojectsort version.
+  rev: v0.2.1
+  hooks:
+    - id: pyprojectsort
+```
+
+Then with [pre-commit installed](https://pre-commit.com/#installation), install the git hook:
+
+```console
+pre-commit install
 ```
 
 ## Examples
