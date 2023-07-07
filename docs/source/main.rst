@@ -10,6 +10,6 @@ pyprojectsort implementation.
 Code Documentation
 ------------------
 
-   .. automodule:: main
+   .. automodule:: pyprojectsort.main
       :members:
       :undoc-members:

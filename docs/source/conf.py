@@ -10,13 +10,12 @@ import tomli as tomllib
 # -- Path setup --------------------------------------------------------------
 
 repository_base_dir = pathlib.Path(__file__).parents[2]
-source_base_dir = repository_base_dir / "pyprojectsort"
 
-sys.path.insert(0, str(source_base_dir))
+sys.path.insert(0, str(repository_base_dir))
 
 # -- Project information -----------------------------------------------------
 
-import __version__  # noqa: E402
+import pyprojectsort  # noqa: E402
 
 with (repository_base_dir / "pyproject.toml").open("rb") as f:
     pyproject_toml = tomllib.load(f)
@@ -29,10 +28,10 @@ project = project_metadata["name"]
 authors = project_metadata["authors"]
 
 # The short X.Y.Z version:
-version = __version__.__version__
+version = pyprojectsort.__version__
 
 # The full version, including alpha/beta/rc tags:
-release = __version__.__version__
+release = pyprojectsort.__version__
 
 # -- General configuration ---------------------------------------------------
 

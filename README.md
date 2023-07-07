@@ -10,7 +10,7 @@
 
 Formatter for pyproject.toml files.
 
-This package enforces consistent formatting of pyproject.toml files, reducing merge request conflicts and saving time that would otherwise be spent on manual formatting. It also contributes to a cleaner git history and more readable code; enhancing overall project organisation and maintainability. Experience a streamlined workflow, reduced errors, and improved code readability with `pyprojectsort`.
+This package enforces consistent formatting of pyproject.toml files, reducing merge request conflicts and saving time otherwise spent to format manually. It also contributes to a cleaner git history and more readable code; enhancing overall project organisation and maintainability. Experience a streamlined workflow, reduced errors, and improved code readability with `pyprojectsort`.
 
 ## Features
 
@@ -26,33 +26,26 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
 
 ## Installation
 
-`pyprojectsort` is available via PyPI (via [Platform Wheels](https://packaging.python.org/guides/distributing-packages-using-setuptools/#platform-wheels)):
+`pyprojectsort` is available via [PyPI](https://pypi.org/project/pyprojectsort/):
 
 ```console
 pip install pyprojectsort
 ```
 
-### Using pyprojectsort with pre-commit
+### Using pyprojectsort with [pre-commit](https://pre-commit.com)
 
 To use as an automated git hook, add this to your `.pre-commit-config.yaml`:
 
 ```yaml
 - repo: https://github.com/kieran-ryan/pyprojectsort
-  # pyprojectsort version.
   rev: v0.2.1
   hooks:
     - id: pyprojectsort
 ```
 
-Then with [pre-commit installed](https://pre-commit.com/#installation), install the git hook:
-
-```console
-pre-commit install
-```
-
 ## Examples
 
-With the following `pyproject.toml` contained inside a directory:
+With the following `pyproject.toml`:
 
 ```toml
 [tool.ruff]
@@ -75,7 +68,7 @@ build-backend = "flit.buildapi"
 requires = ["flit"]
 ```
 
-Run the package from within the directory of the pyproject toml file:
+Run the package from within its directory:
 
 ```console
 pyprojectsort
@@ -107,7 +100,7 @@ ignore = [
 ]
 ```
 
-The path to the pyproject toml file can also be specified from the command line:
+The pyproject file path can alternatively be specified:
 
 ```console
 pyprojectsort ../pyproject.toml
@@ -115,16 +108,14 @@ pyprojectsort ../pyproject.toml
 
 ### Check formatting
 
-To check whether formatting would be applied to your file you may use the **--check** option.
+The **--check** option can be used to determine whether your file would be reformatted.
 
 ```console
 pyprojectsort --check
 ```
 
-When the file would be reformatted, the output message `'{file_path}' would be reformatted` displays and the program terminates with exit code 1.
-
-If the given file matches the style of `pyprojectsort`, the output message `'{file_path}' would be left unchanged` displays and the program terminates successfully.
+If the file needs reformatting, the program exits with code 1. This is useful for [pipeline integration](https://github.com/kieran-ryan/pyprojectsort/blob/d9cf5e1e646e1e5260f7cf0168ecd0a05ce8ed11/.github/workflows/main.yml#L30) as it prevents writing back changes so a clean repository is maintained for subsequent jobs.
 
 ## License
 
-`pyprojectsort` is licensed under the [MIT License](https://opensource.org/licenses/MIT)
+`pyprojectsort` is licensed under the [MIT License](https://opensource.org/licenses/MIT).

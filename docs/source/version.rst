@@ -10,6 +10,6 @@ Package version information.
 Code Documentation
 ------------------
 
-   .. automodule:: __version__
+   .. automodule:: pyprojectsort.__version__
       :members:
       :undoc-members:
