@@ -116,14 +116,14 @@ def test_main_with_file_reformatted(
     args = CLIArgs()
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
-    parse_pyproject.return_value = {}
+    parse_pyproject.return_value = "change = 1"
     reformat_pyproject.return_value = {"change": 1}
 
     with pytest.raises(SystemExit) as reformatted, OutputCapture() as output:
         main()
 
     assert reformatted.value.code == 1
-    assert output.text == f"Reformatted '{args.file}'"
+    assert f"Reformatted '{args.file}'" in output.text
 
 
 @unittest.mock.patch("pyprojectsort.main._save_pyproject")
@@ -142,13 +142,13 @@ def test_main_with_file_unchanged(
     args = CLIArgs()
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
-    parse_pyproject.return_value = {}
+    parse_pyproject.return_value = ""
     reformat_pyproject.return_value = {}
 
     with OutputCapture() as output:
         main()
 
-    assert output.text == f"'{args.file}' left unchanged"
+    assert f"'{args.file}' left unchanged" in output.text
 
 
 @unittest.mock.patch("pyprojectsort.main.reformat_pyproject")
@@ -165,14 +165,48 @@ def test_check_option_reformat_needed(
     args = CLIArgs(check=True)
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
-    parse_pyproject.return_value = {}
+    parse_pyproject.return_value = "change = 1"
     reformat_pyproject.return_value = {"change": 1}
 
-    with pytest.raises(SystemExit) as pytest_wrapped_e, OutputCapture() as output:
+    with pytest.raises(SystemExit) as would_reformat, OutputCapture() as output:
         main()
 
-    assert output.text == f"'{args.file}' would be reformatted"
-    assert pytest_wrapped_e.value.code == 1
+    assert f"'{args.file}' would be reformatted" in output.text
+    assert would_reformat.value.code == 1
+
+
+@pytest.mark.parametrize(
+    ("original"),
+    [
+        ('unsorted = [\n    "tests",\n    "docs",\n]\n'),
+        ('not-indented = [\n    "docs",\n"tests",\n]\n'),
+        ('no-trailing-comma = [\n    "docs",\n    "tests"\n]\n'),
+        ('not-line-per-list-value = ["docs","tests"]\n'),
+        ('extra_spaces =   "value"\n'),
+        ('no-newline-at-end-of-file = "value"'),
+        ("single-quotes = 'value'\n"),
+    ],
+)
+@unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
+@unittest.mock.patch("pyprojectsort.main._read_config_file")
+@unittest.mock.patch("pyprojectsort.main._read_cli")
+def test_would_reformat(
+    read_cli,
+    read_config,
+    parse_pyproject,
+    original,
+):
+    """Test --check option when reformat occurs."""
+    args = CLIArgs(check=True)
+    read_cli.return_value = args
+    read_config.return_value = pathlib.Path()
+    parse_pyproject.return_value = original
+
+    with pytest.raises(SystemExit) as would_reformat, OutputCapture() as output:
+        main()
+    print(output.text)
+    assert f"'{args.file}' would be reformatted" in output.text
+    assert would_reformat.value.code == 1
 
 
 @unittest.mock.patch("pyprojectsort.main.reformat_pyproject")
@@ -189,20 +223,28 @@ def test_check_option_reformat_not_needed(
     args = CLIArgs(check=True)
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
-    parse_pyproject.return_value = {"unchanged": 1}
+    parse_pyproject.return_value = "unchanged = 1\n"
     reformat_pyproject.return_value = {"unchanged": 1}
 
     with OutputCapture() as output:
         main()
 
-    assert output.text == f"'{args.file}' would be left unchanged"
+    assert f"'{args.file}' would be left unchanged" in output.text
 
 
 @pytest.mark.parametrize(
     ("original", "reformatted", "expected_result"),
     [
-        ({"unchanged": 1}, {"unchanged": 1}, False),
-        ({"should_be_changed": 1}, {"changed": 1}, True),
+        (
+            '[tool.pylint]\nignore = [\n\t"tests",\n\t"docs",\n]',
+            '[tool.pylint]\nignore = [\n\t"tests",\n\t"docs",\n]',
+            False,
+        ),
+        (
+            '[tool.pylint]\nignore = [\n\t"tests",\n\t"docs",\n]',
+            '[tool.pylint]\nignore = [\n\t"docs",\n\t"tests",\n]',
+            True,
+        ),
     ],
 )
 def test_check_format_needed(original, reformatted, expected_result):
