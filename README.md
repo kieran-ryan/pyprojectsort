@@ -23,6 +23,7 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
   - double quotations
   - trailing commas
   - indentation
+  - end of file newline
 
 ## Installation
 

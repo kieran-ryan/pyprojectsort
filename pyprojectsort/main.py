@@ -48,8 +48,8 @@ def _read_config_file(config: pathlib.Path) -> pathlib.Path:
 
 def _parse_pyproject_toml(file: pathlib.Path) -> dict[str, Any]:
     """Parse pyproject.toml file."""
-    with file.open("rb") as pyproject_file:
-        return tomllib.load(pyproject_file)
+    with file.open("r") as pyproject_file:
+        return pyproject_file.read()
 
 
 def reformat_pyproject(pyproject: dict | list) -> dict:
@@ -64,7 +64,7 @@ def reformat_pyproject(pyproject: dict | list) -> dict:
     return pyproject
 
 
-def _check_format_needed(original: dict, reformatted: dict) -> bool:
+def _check_format_needed(original: str, reformatted: str) -> bool:
     """Check if there are any differences between original and reformatted."""
     return original != reformatted
 
@@ -79,10 +79,13 @@ def main() -> None:
     """Run application."""
     args = _read_cli(sys.argv[1:])
     pyproject_file = _read_config_file(pathlib.Path(args.file))
-    pyproject_toml = _parse_pyproject_toml(pyproject_file)
-    reformatted_pyproject = reformat_pyproject(pyproject_toml)
 
-    will_reformat = _check_format_needed(pyproject_toml, reformatted_pyproject)
+    pyproject_toml: str = _parse_pyproject_toml(pyproject_file)
+    pyproject: dict = tomllib.loads(pyproject_toml)
+    reformatted_pyproject: dict = reformat_pyproject(pyproject)
+    reformatted_pyproject_toml: str = tomli_w.dumps(reformatted_pyproject)
+
+    will_reformat = _check_format_needed(pyproject_toml, reformatted_pyproject_toml)
 
     if args.check:
         if will_reformat:
