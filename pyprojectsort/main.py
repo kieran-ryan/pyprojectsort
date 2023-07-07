@@ -88,9 +88,9 @@ def main() -> None:
         if will_reformat:
             print(f"'{args.file}' would be reformatted")
             sys.exit(1)
-        else:
-            print(f"'{args.file}' would be left unchanged")
-            return
+
+        print(f"'{args.file}' would be left unchanged")
+        return
 
     if will_reformat:
         _save_pyproject(pyproject_file, reformatted_pyproject)
