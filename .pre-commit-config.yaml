@@ -44,3 +44,7 @@ repos:
       - id: bandit
         args: [--configfile=pyproject.toml, --severity-level=medium, .]
         additional_dependencies: ["bandit[toml]"]
+  - repo: https://github.com/kieran-ryan/pyprojectsort
+    rev: v0.2.2
+    hooks:
+      - id: pyprojectsort
