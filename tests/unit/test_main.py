@@ -73,7 +73,7 @@ def test_reformat_pyproject():
     pyproject = {
         "project": {"name": "pyprojectsort"},
         "build-system": {"name": "flit"},
-        "tool.pylint": {"ignore": ["docs", "tests", "venv"]},
+        "tool.pylint": {"ignore": ["docs", "tests", "venv", 1, 1.1, {}]},
         "tool.black": {"line_length": 88},
     }
 
@@ -82,7 +82,7 @@ def test_reformat_pyproject():
         "build-system": {"name": "flit"},
         "project": {"name": "pyprojectsort"},
         "tool.black": {"line_length": 88},
-        "tool.pylint": {"ignore": ["docs", "tests", "venv"]},
+        "tool.pylint": {"ignore": [1, 1.1, "docs", "tests", "venv", {}]},
     }
     assert reformat_pyproject(pyproject) == sorted_pyproject
 

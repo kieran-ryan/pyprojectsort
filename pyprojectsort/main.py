@@ -56,11 +56,20 @@ def reformat_pyproject(pyproject: dict | list) -> dict:
     """Reformat pyproject toml file."""
     if isinstance(pyproject, dict):
         return {
-            key: reformat_pyproject(value)
-            for key, value in sorted(pyproject.items(), key=lambda item: item[0])
+            key: reformat_pyproject(value) for key, value in sorted(pyproject.items())
         }
     if isinstance(pyproject, list):
-        return sorted(reformat_pyproject(item) for item in pyproject)
+        numbers = []
+        strings = []
+        dictionaries = []
+        for i in pyproject:
+            if isinstance(i, float | int):
+                numbers.append(i)
+            elif isinstance(i, str):
+                strings.append(i)
+            else:
+                dictionaries.append(reformat_pyproject(i))
+        return sorted(numbers, key=lambda x: str(x)) + sorted(strings) + dictionaries
     return pyproject
 
 
