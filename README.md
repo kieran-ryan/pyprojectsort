@@ -10,7 +10,7 @@
 
 Formatter for pyproject.toml files.
 
-This package enforces consistent formatting of pyproject.toml files, reducing merge request conflicts and saving time otherwise spent to format manually. It also contributes to a cleaner git history and more readable code; enhancing overall project organisation and maintainability. Experience a streamlined workflow, reduced errors, and improved code readability with `pyprojectsort`.
+This package enforces consistent formatting of pyproject.toml files, reducing merge request conflicts and saving time otherwise spent on manual formatting. It also contributes to a cleaner git history and more readable code; enhancing overall project organisation and maintainability. Experience a streamlined workflow, reduced errors, and improved code readability with `pyprojectsort`.
 
 ## Features
 
