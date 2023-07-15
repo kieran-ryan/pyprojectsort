@@ -48,3 +48,7 @@ repos:
     rev: v0.2.2
     hooks:
       - id: pyprojectsort
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v6.31.0
+    hooks:
+      - id: cspell
