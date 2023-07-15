@@ -94,10 +94,29 @@ class CLIArgs:
         self,
         file: str = "test_data.toml",
         check: bool | None = None,
+        diff: bool | None = None,
     ):
         """Initialise test data arguments."""
         self.file = file
         self.check = check
+        self.diff = diff
+
+
+@unittest.mock.patch("pyprojectsort.main._read_config_file")
+@unittest.mock.patch("pyprojectsort.main._read_cli")
+def test_main_with_check_and_diff_options(read_cli, read_config):
+    """SystemExit with error code if both check and diff CLI options provided."""
+    args = CLIArgs(check=True, diff=True)
+    read_cli.return_value = args
+
+    with pytest.raises(SystemExit) as reformatted, OutputCapture() as output:
+        main()
+
+    assert reformatted.value.code == 1
+    assert (
+        output.text
+        == "Use of 'check' with 'diff' is redundant. Please use one or the other."
+    )
 
 
 @unittest.mock.patch("pyprojectsort.main._save_pyproject")
@@ -110,7 +129,7 @@ def test_main_with_file_reformatted(
     read_config,
     parse_pyproject,
     reformat_pyproject,
-    save_pyproject,
+    save_project,
 ):
     """Test file reformatted."""
     args = CLIArgs()
@@ -190,7 +209,7 @@ def test_check_option_reformat_needed(
 @unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
 @unittest.mock.patch("pyprojectsort.main._read_config_file")
 @unittest.mock.patch("pyprojectsort.main._read_cli")
-def test_would_reformat(
+def test_check_would_reformat(
     read_cli,
     read_config,
     parse_pyproject,
@@ -221,6 +240,87 @@ def test_check_option_reformat_not_needed(
 ):
     """Test --check option when reformat is not needed."""
     args = CLIArgs(check=True)
+    read_cli.return_value = args
+    read_config.return_value = pathlib.Path()
+    parse_pyproject.return_value = "unchanged = 1\n"
+    reformat_pyproject.return_value = {"unchanged": 1}
+
+    with OutputCapture() as output:
+        main()
+
+    assert f"'{args.file}' would be left unchanged" in output.text
+
+
+@unittest.mock.patch("pyprojectsort.main.reformat_pyproject")
+@unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
+@unittest.mock.patch("pyprojectsort.main._read_config_file")
+@unittest.mock.patch("pyprojectsort.main._read_cli")
+def test_diff_option_reformat_needed(
+    read_cli,
+    read_config,
+    parse_pyproject,
+    reformat_pyproject,
+):
+    """Test --diff option when reformat occurs."""
+    args = CLIArgs(diff=True)
+    read_cli.return_value = args
+    read_config.return_value = pathlib.Path()
+    parse_pyproject.return_value = "change = 1"
+    reformat_pyproject.return_value = {"change": 1}
+
+    with pytest.raises(SystemExit) as would_reformat, OutputCapture() as output:
+        main()
+
+    assert f"'{args.file}' would be reformatted" in output.text
+    assert would_reformat.value.code == 1
+
+
+@pytest.mark.parametrize(
+    ("original"),
+    [
+        ('unsorted = [\n    "tests",\n    "docs",\n]\n'),
+        ('not-indented = [\n    "docs",\n"tests",\n]\n'),
+        ('no-trailing-comma = [\n    "docs",\n    "tests"\n]\n'),
+        ('not-line-per-list-value = ["docs","tests"]\n'),
+        ('extra_spaces =   "value"\n'),
+        ('no-newline-at-end-of-file = "value"'),
+        ("single-quotes = 'value'\n"),
+    ],
+)
+@unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
+@unittest.mock.patch("pyprojectsort.main._read_config_file")
+@unittest.mock.patch("pyprojectsort.main._read_cli")
+def test_diff_would_reformat(
+    read_cli,
+    read_config,
+    parse_pyproject,
+    original,
+):
+    """Test --diff option when reformat occurs."""
+    args = CLIArgs(diff=True)
+    read_cli.return_value = args
+    read_config.return_value = pathlib.Path()
+    parse_pyproject.return_value = original
+
+    with pytest.raises(SystemExit) as would_reformat, OutputCapture() as output:
+        main()
+    print(output.text)
+    assert f"'{args.file}' would be reformatted" in output.text
+    assert would_reformat.value.code == 1
+
+
+@unittest.mock.patch("pyprojectsort.main.reformat_pyproject")
+@unittest.mock.patch("pyprojectsort.main._parse_pyproject_toml")
+@unittest.mock.patch("pyprojectsort.main._read_config_file")
+@unittest.mock.patch("pyprojectsort.main._read_cli")
+def test_diff_option_reformat_not_needed(
+    read_cli,
+    read_config,
+    parse_pyproject,
+    reformat_pyproject,
+):
+    """Test --diff option when reformat is not needed."""
+    args = CLIArgs(diff=True)
     read_cli.return_value = args
     read_config.return_value = pathlib.Path()
     parse_pyproject.return_value = "unchanged = 1\n"

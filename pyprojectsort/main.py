@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import pathlib
 import sys
+from difflib import unified_diff
 from typing import Any
 
 import tomli as tomllib
@@ -93,6 +94,11 @@ def _read_cli(args: list) -> argparse.Namespace:
         ),
         action="store_true",
     )
+    parser.add_argument(
+        "--diff",
+        help="Don't write the files back, just output a diff of changes",
+        action="store_true",
+    )
     return parser.parse_args(args)
 
 
@@ -153,12 +159,28 @@ def main() -> None:
     args = _read_cli(sys.argv[1:])
     pyproject_file = _read_config_file(pathlib.Path(args.file))
 
+    if args.diff and args.check:
+        print("Use of 'check' with 'diff' is redundant. Please use one or the other.")
+        sys.exit(1)
+
     pyproject_toml: str = _parse_pyproject_toml(pyproject_file)
     pyproject: dict = tomllib.loads(pyproject_toml)
     reformatted_pyproject: dict = reformat_pyproject(pyproject)
     reformatted_pyproject_toml: str = tomli_w.dumps(reformatted_pyproject)
 
     will_reformat = _check_format_needed(pyproject_toml, reformatted_pyproject_toml)
+
+    if args.diff:
+        if will_reformat:
+            for line in unified_diff(
+                pyproject_toml.split("\n"),
+                reformatted_pyproject_toml.split("\n"),
+            ):
+                print(line)
+            print(f"\n'{args.file}' would be reformatted")
+            sys.exit(1)
+        print(f"'{args.file}' would be left unchanged")
+        return
 
     if args.check:
         if will_reformat:

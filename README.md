@@ -125,7 +125,25 @@ The **--check** option can be used to determine whether your file would be refor
 pyprojectsort --check
 ```
 
-If the file needs reformatting, the program exits with code 1. This is useful for [pipeline integration](https://github.com/kieran-ryan/pyprojectsort/blob/d9cf5e1e646e1e5260f7cf0168ecd0a05ce8ed11/.github/workflows/main.yml#L30) as it prevents writing back changes so a clean repository is maintained for subsequent jobs.
+If the file needs reformatting, the program exits with an error code. This is useful for [pipeline integration](https://github.com/kieran-ryan/pyprojectsort/blob/d9cf5e1e646e1e5260f7cf0168ecd0a05ce8ed11/.github/workflows/main.yml#L30) as it prevents writing back changes so that a clean repository is maintained for subsequent jobs.
+
+The **--diff** option provides similar functionality but also displays any changes that would be made.
+
+```console
+pyprojectsort --diff
+```
+
+The diff of alphabetically reordering an array will appear as follows:
+
+```diff
+@@ -6,8 +6,8 @@
+[project]
+authors = [
++ { name = "Author Name" },
+  { name = "Kieran Ryan" },
+- { name = "Author Name" },
+]
+```
 
 ## License
 
