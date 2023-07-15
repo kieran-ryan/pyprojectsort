@@ -14,6 +14,64 @@ from . import __version__
 DEFAULT_CONFIG = "pyproject.toml"
 
 
+def _bubble_sort(array: list[dict | list]) -> list[dict | list]:
+    """Bubble sort algorithm for sorting an array of lists or dictionaries.
+
+    Examples:
+        >>> _bubble_sort([[4, 3], [1, 2]])
+        [[1, 2], [4, 3]]
+        >>> _bubble_sort([[1.0, 3, 4], ["1", 2]])
+        [['1', 2], [1.0, 3, 4]]
+        >>> _bubble_sort([{"b": 1}, {"a": 2}])
+        [{'a': 2}, {'b': 1}]
+        >>> _bubble_sort([{"a": 2}, {"a": 1}])
+        [{'a': 1}, {'a': 2}]
+        >>> _bubble_sort([{"a": 1}, {"a": 2}])
+        [{'a': 1}, {'a': 2}]
+        >>> _bubble_sort([])
+        []
+    """
+    n = len(array)
+    for i in range(n):
+        already_sorted = True
+        for j in range(n - i - 1):
+            first = get_comparison_array(array[j])
+            second = get_comparison_array(array[j + 1])
+
+            if first == second:
+                first = get_comparison_array(array[j], values=True)
+                second = get_comparison_array(array[j + 1], values=True)
+
+            if first > second:
+                array[j], array[j + 1] = array[j + 1], array[j]
+                already_sorted = False
+
+        if already_sorted:
+            break
+    return array
+
+
+def get_comparison_array(
+    items: list | dict,
+    values: bool = False,  # noqa: FBT
+) -> list[str]:
+    """Returns an array from an iterable to be used for comparison.
+
+    Dictionary keys are returned by default, and values if specified.
+
+    Examples:
+        >>> get_comparison_array([2, 4, 5])
+        ['2', '4', '5']
+        >>> get_comparison_array({"a": 1, "b": 2})
+        ['a', 'b']
+        >>> get_comparison_array({"a": 1, "b": 2}, values=True)
+        ['1', '2']
+    """
+    if isinstance(items, dict):
+        items = items.values() if values else items.keys()
+    return list(map(str, items))
+
+
 def _read_cli(args: list) -> argparse.Namespace:
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(
@@ -59,17 +117,23 @@ def reformat_pyproject(pyproject: dict | list) -> dict:
             key: reformat_pyproject(value) for key, value in sorted(pyproject.items())
         }
     if isinstance(pyproject, list):
-        numbers = []
-        strings = []
-        dictionaries = []
-        for i in pyproject:
-            if isinstance(i, float | int):
-                numbers.append(i)
-            elif isinstance(i, str):
-                strings.append(i)
-            else:
-                dictionaries.append(reformat_pyproject(i))
-        return sorted(numbers, key=lambda x: str(x)) + sorted(strings) + dictionaries
+        data_types = {bool: [], float: [], int: [], str: [], list: [], dict: []}
+
+        def update_data_type(item: Any) -> None:
+            """Populate data types map based on item type."""
+            data_type = type(item)
+            container = data_types[data_type]
+            container.append(reformat_pyproject(item))
+
+        list(map(update_data_type, pyproject))
+
+        return (
+            data_types[bool]
+            + sorted(data_types[int] + data_types[float], key=str)
+            + sorted(data_types[str])
+            + _bubble_sort(data_types[list])
+            + _bubble_sort(data_types[dict])
+        )
     return pyproject
 
 

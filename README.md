@@ -57,6 +57,11 @@ ignore = ["G004",
 
 [project]
 name = 'pyprojectsort'
+authors = [
+    { name = "Kieran Ryan" },
+    "Author Name <author@email.com>",
+    {name="Author name"}
+]
 
 [tool.radon]
 show_mi = true
@@ -85,6 +90,11 @@ requires = [
 ]
 
 [project]
+authors = [
+    "Author Name <author@email.com>",
+    { name = "Author Name" },
+    { name = "Kieran Ryan" },
+]
 name = "pyprojectsort"
 
 [tool.radon]
