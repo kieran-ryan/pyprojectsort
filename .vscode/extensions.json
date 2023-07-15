@@ -2,6 +2,7 @@
   "recommendations": [
     "editorconfig.editorconfig",
     "ms-python.black-formatter",
-    "ms-python.python"
+    "ms-python.python",
+    "streetsidesoftware.code-spell-checker-british-english"
   ]
 }

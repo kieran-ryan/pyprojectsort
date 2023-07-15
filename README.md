@@ -133,7 +133,7 @@ The **--diff** option provides similar functionality but also displays any chang
 pyprojectsort --diff
 ```
 
-The diff of alphabetically reordering an array will appear as follows:
+The diff of an alphabetically reordered array will appear as follows:
 
 ```diff
 @@ -6,8 +6,8 @@
