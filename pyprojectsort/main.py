@@ -15,12 +15,6 @@ from . import __version__
 DEFAULT_CONFIG = "pyproject.toml"
 
 
-
-
-
-
-
-
 def _bubble_sort(array: list[dict | list]) -> list[dict | list]:
     """Bubble sort algorithm for sorting an array of lists or dictionaries.
 
