@@ -24,6 +24,8 @@
         "maxdepth",
         "mdinclude",
         "modindex",
+        "natsort",
+        "natsorted",
         "peaceiris",
         "perflint",
         "popd",

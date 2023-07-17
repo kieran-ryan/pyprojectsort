@@ -7,6 +7,7 @@ import sys
 from difflib import unified_diff
 from typing import Any
 
+import natsort
 import tomli as tomllib
 import tomli_w
 
@@ -120,7 +121,8 @@ def reformat_pyproject(pyproject: dict | list) -> dict:
     """Reformat pyproject toml file."""
     if isinstance(pyproject, dict):
         return {
-            key: reformat_pyproject(value) for key, value in sorted(pyproject.items())
+            key: reformat_pyproject(value)
+            for key, value in natsort.natsorted(pyproject.items())
         }
     if isinstance(pyproject, list):
         data_types = {bool: [], float: [], int: [], str: [], list: [], dict: []}
@@ -135,8 +137,8 @@ def reformat_pyproject(pyproject: dict | list) -> dict:
 
         return (
             data_types[bool]
-            + sorted(data_types[int] + data_types[float], key=str)
-            + sorted(data_types[str])
+            + sorted(data_types[int] + data_types[float], key=float)
+            + natsort.natsorted(data_types[str])
             + _bubble_sort(data_types[list])
             + _bubble_sort(data_types[dict])
         )

@@ -1,8 +1,8 @@
 # pyprojectsort
 
-[![image](https://badge.fury.io/py/pyprojectsort.svg)](https://pypi.org/project/pyprojectsort/)
-![image](https://img.shields.io/badge/license-MIT-blue)
-[![image](https://img.shields.io/pypi/pyversions/pyprojectsort.svg)](https://pypi.org/pypi/pyprojectsort)
+[![PyPI Version](https://badge.fury.io/py/pyprojectsort.svg)](https://pypi.org/project/pyprojectsort/)
+![LICENSE](https://img.shields.io/badge/license-MIT-blue)
+[![Python versions](https://img.shields.io/pypi/pyversions/pyprojectsort.svg)](https://pypi.org/pypi/pyprojectsort)
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
@@ -15,7 +15,7 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
 
 ## Features
 
-- Alphabetically sorts pyproject.toml by:
+- Alphanumerically sorts pyproject.toml by:
   - section
   - section key
   - list value
