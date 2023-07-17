@@ -54,7 +54,7 @@ def _bubble_sort(array: list[dict | list]) -> list[dict | list]:
 
 def get_comparison_array(
     items: list | dict,
-    values: bool = False,  # noqa: FBT
+    values: bool = False,  # noqa: FBT001, FBT002
 ) -> list[str]:
     """Returns an array from an iterable to be used for comparison.
 
