@@ -1,8 +1,10 @@
 {
   "recommendations": [
+    "charliermarsh.ruff",
     "editorconfig.editorconfig",
     "ms-python.black-formatter",
     "ms-python.python",
-    "streetsidesoftware.code-spell-checker-british-english"
+    "streetsidesoftware.code-spell-checker-british-english",
+    "esbenp.prettier-vscode"
   ]
 }

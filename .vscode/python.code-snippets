@@ -1,10 +1,7 @@
 {
   "if(main)": {
     "prefix": "__main__",
-    "body": [
-      "if __name__ == \"__main__\":",
-      "    ${1:pass}"
-    ],
+    "body": ["if __name__ == \"__main__\":", "    ${1:pass}"],
     "description": "Code snippet for a `if __name__ == \"__main__\": ...` block"
-  },
+  }
 }
