@@ -40,7 +40,7 @@ To use as an automated git hook, add this to your `.pre-commit-config.yaml`:
 
 ```yaml
 - repo: https://github.com/kieran-ryan/pyprojectsort
-  rev: v0.2.2
+  rev: v0.3.0
   hooks:
     - id: pyprojectsort
 ```
