@@ -61,7 +61,7 @@ name = 'pyprojectsort'
 authors = [
     { name = "Kieran Ryan" },
     "Author Name <author@email.com>",
-    {name="Author name"}
+    {name="Author Name"}
 ]
 
 [tool.radon]
