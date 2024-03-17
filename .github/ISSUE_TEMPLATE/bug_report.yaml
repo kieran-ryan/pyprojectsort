@@ -1,0 +1,53 @@
+name: Bug Report
+description: Create a report to help us improve
+labels: [":bug: bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 👓 What did you see?
+      description: A clear and concise description of what you saw happen.
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: textarea
+    id: what-was-expected
+    attributes:
+      label: ✅ What did you expect to see?
+      description: Describe what you would like to have happen instead.
+      placeholder: Tell us what you expected to see!
+    validations:
+      required: true
+  - type: textarea
+    id: version
+    attributes:
+      label: 📦 Which package version are you using?
+      description: What version of our software are you running?
+      placeholder: |
+        python 3.12.0
+        pyprojectsort 0.3.0
+  - type: textarea
+    id: how-to-reproduce
+    attributes:
+      label: 🔬 How could we reproduce it?
+      description: >
+        It order to fix the problem, we need to be able to reproduce it.
+        A [Minimal Reproducible Example](https://stackoverflow.com/help/minimal-reproducible-example) can be really helpful for anyone
+        trying to diagnose and fix the problem.
+
+
+        Please outline the steps below:
+      placeholder: |
+        1. Install '...' version '...'
+        2. Create a file called '....'
+        3. Run command '....'
+        4. See error '....'
+  - type: textarea
+    id: context
+    attributes:
+      label: 📚 Any additional context?
+      description: Add any other context, references, logs or screenshots about the problem here.

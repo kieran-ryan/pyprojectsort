@@ -1,0 +1,27 @@
+name: Developer Experience
+description: >
+  Refactoring or technical debt payback that makes the codebase more
+  pleasant to work on
+labels: [":bank: debt"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for suggesting an improvement to the code!
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🤔 What's the problem you've observed?
+      placeholder: Add your observations here...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: ✨ Do you have a proposal for making it better?
+      placeholder: Add your suggestions here...
+  - type: textarea
+    id: context
+    attributes:
+      label: 📚 Any additional context?
+      placeholder: >
+        Add any other context, references or screenshots here.
