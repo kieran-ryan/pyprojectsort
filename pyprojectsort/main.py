@@ -1,4 +1,5 @@
 """pyprojectsort implementation."""
+
 from __future__ import annotations
 
 import argparse
@@ -33,10 +34,9 @@ def _bubble_sort(array: list[dict | list]) -> list[dict | list]:
         >>> _bubble_sort([])
         []
     """
-    n = len(array)
-    for i in range(n):
+    for i in range(len(array)):
         already_sorted = True
-        for j in range(n - i - 1):
+        for j in range(len(array) - i - 1):
             first = get_comparison_array(array[j])
             second = get_comparison_array(array[j + 1])
 
