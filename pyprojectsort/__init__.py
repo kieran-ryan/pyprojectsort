@@ -1,4 +1,5 @@
 """Top-level package of `pyprojectsort`."""
+
 from __future__ import annotations
 
 from .__version__ import __version__
