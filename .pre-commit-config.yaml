@@ -16,8 +16,8 @@ repos:
     rev: v0.3.0
     hooks:
       - id: pyprojectsort
-  - repo: https://github.com/kieran-ryan/removestar-pre-commit
-    rev: 1.3.1
+  - repo: https://github.com/asmeurer/removestar
+    rev: "1.5"
     hooks:
       - id: removestar
         args: [-i, pyprojectsort]

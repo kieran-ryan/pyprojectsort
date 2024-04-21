@@ -2,6 +2,7 @@
 
 This package uses Semantic Versioning, see: https://semver.org.
 """
+
 from __future__ import annotations
 
 MAJOR = 0
