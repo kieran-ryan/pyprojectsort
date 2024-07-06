@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Python 3.12 support - [#70](https://github.com/kieran-ryan/pyprojectsort/pull/70)
+- Python 3.12 and 3.13 support - [#70](https://github.com/kieran-ryan/pyprojectsort/pull/70)
 
 ## 0.3.0 - 2023-07-18
 

@@ -20,7 +20,7 @@ repos:
     rev: "1.5"
     hooks:
       - id: removestar
-        args: [-i, pyprojectsort]
+        args: [--in-place, pyprojectsort]
   - repo: https://github.com/psf/black
     rev: 24.4.0
     hooks:
