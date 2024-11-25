@@ -44,6 +44,7 @@
     "SOURCEDIR",
     "testpypi",
     "toctree",
+    "tomli",
     "undoc",
     "venv"
   ]

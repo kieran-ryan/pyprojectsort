@@ -9,8 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Bump version of tomli-w - [#75](https://github.com/kieran-ryan/pyprojectsort/pull/75)
 - Python 3.12 and 3.13 support - [#70](https://github.com/kieran-ryan/pyprojectsort/pull/70)
+
+### Fixed
+
+- Allow tomli-w above v1.0.0 - [#75](https://github.com/kieran-ryan/pyprojectsort/pull/75)
 
 ## 0.3.0 - 2023-07-18
 
