@@ -1,7 +1,7 @@
 [build-system]
-build-backend = "flit.buildapi"
+build-backend = "flit_core.buildapi"
 requires = [
-    "flit",
+    "flit_core >=2,<4",
 ]
 
 [project]
