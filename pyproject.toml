@@ -1,7 +1,7 @@
 [build-system]
-build-backend = "flit.buildapi"
+build-backend = "flit_core.buildapi"
 requires = [
-    "flit",
+    "flit_core >=2,<4",
 ]
 
 [project]
@@ -9,35 +9,46 @@ authors = [
     { name = "Kieran Ryan" },
 ]
 classifiers = [
+    "Environment :: Console",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: MacOS",
-    "Operating System :: Microsoft :: Windows",
-    "Operating System :: POSIX :: Linux",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
 ]
 dependencies = [
-    "natsort==8.4.0",
-    "tomli-w==1.0.0",
-    "tomli==2.0.1",
+    "natsort>=8.4.0,<9",
+    "tomli-w>=1.0.0",
+    "tomli>=2.0.1,<3",
 ]
 description = "Formatter for pyproject.toml files"
 dynamic = [
     "version",
 ]
+keywords = [
+    "formatter",
+    "pyproject",
+]
 name = "pyprojectsort"
 readme = "README.md"
+requires-python = ">=3.7"
+
+[project.license]
+file = "LICENSE"
 
 [project.scripts]
 pyprojectsort = "pyprojectsort.main:main"
 
 [project.urls]
-Documentation = "https://kieran-ryan.github.io/pyprojectsort/"
+Changelog = "https://github.com/kieran-ryan/pyprojectsort/blob/main/CHANGELOG.md"
+Documentation = "https://kieran-ryan.github.io/pyprojectsort"
 Source = "https://github.com/kieran-ryan/pyprojectsort"
 Tracker = "https://github.com/kieran-ryan/pyprojectsort/issues"
 
@@ -103,6 +114,8 @@ ignore = [
     "ARG",
     "D203",
     "D213",
+    "D406",
+    "D407",
     "DTZ005",
     "FIX002",
     "G004",
