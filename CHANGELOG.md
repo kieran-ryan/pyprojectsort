@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 0.4.0 - 2023-12-31
+
 ### Added
 
 - Python 3.12 and 3.13 support - [#70](https://github.com/kieran-ryan/pyprojectsort/pull/70)
