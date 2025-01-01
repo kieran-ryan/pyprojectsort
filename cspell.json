@@ -18,6 +18,7 @@
     "codecov",
     "configfile",
     "cyclomatic",
+    "debugpy",
     "errorlevel",
     "esbenp",
     "furo",
