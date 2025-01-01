@@ -1,4 +1,0 @@
---requirement requirements.txt
-furo==2023.9.10
-Sphinx==7.2.6
-sphinx-mdinclude==0.5.3

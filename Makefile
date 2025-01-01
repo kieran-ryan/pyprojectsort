@@ -1,8 +1,7 @@
 .PHONY: docs
 init:
 	python -m venv venv
-	. venv/bin/activate && pip install --requirement requirements-dev.txt
-	git submodule update --init --recursive
+	. venv/bin/activate && pip install --requirement requirements.txt
 
 coverage:
 	pytest --cov-report term --cov-report html --cov-report xml --cov=pyprojectsort
