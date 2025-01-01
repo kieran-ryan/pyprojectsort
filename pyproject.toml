@@ -52,12 +52,6 @@ Documentation = "https://kieran-ryan.github.io/pyprojectsort"
 Source = "https://github.com/kieran-ryan/pyprojectsort"
 Tracker = "https://github.com/kieran-ryan/pyprojectsort/issues"
 
-[tool.bandit]
-exclude_dirs = [
-    "tests",
-    "venv",
-]
-
 [tool.coverage.html]
 directory = "docs/coverage"
 
@@ -78,23 +72,6 @@ output = "docs/coverage/coverage.xml"
 [tool.flit.module]
 name = "pyprojectsort"
 
-[tool.isort]
-profile = "black"
-src_paths = "pyprojectsort"
-
-[tool.mypy]
-exclude = "__init__.py|docs|tests|venv"
-files = "."
-mypy_path = "pyprojectsort"
-
-[tool.pylint]
-ignore = [
-    "docs",
-    "tests",
-    "venv",
-]
-recursive = true
-
 [tool.pytest.ini_options]
 addopts = "--doctest-modules -rA --verbose --junitxml=junit.xml -o junit_family=legacy"
 testpaths = [
@@ -102,13 +79,10 @@ testpaths = [
     "tests",
 ]
 
-[tool.radon]
-exclude = "tests/*,venv/*"
-show_complexity = true
-show_mi = true
-total_average = true
-
 [tool.ruff]
+target-version = "py37"
+
+[tool.ruff.lint]
 ignore = [
     "ANN",
     "ARG",
@@ -128,10 +102,13 @@ select = [
     "ALL",
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 required-imports = [
     "from __future__ import annotations",
 ]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pydocstyle]
 convention = "google"
