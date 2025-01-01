@@ -5,8 +5,6 @@
 [![Python versions](https://img.shields.io/pypi/pyversions/pyprojectsort.svg)](https://pypi.org/pypi/pyprojectsort)
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 ![Pipeline status](https://github.com/kieran-ryan/python-package-template/actions/workflows/main.yml/badge.svg)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/kieran-ryan/pyprojectsort/main.svg)](https://results.pre-commit.ci/latest/github/kieran-ryan/pyprojectsort/main)
 
@@ -41,7 +39,7 @@ To use as an automated git hook, add this to your `.pre-commit-config.yaml`:
 
 ```yaml
 - repo: https://github.com/kieran-ryan/pyprojectsort
-  rev: v0.3.0
+  rev: v0.4.0
   hooks:
     - id: pyprojectsort
 ```
