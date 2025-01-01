@@ -49,12 +49,12 @@ jobs:
         run: uv pip install --requirement requirements.txt
 
       - name: Build documentation
-        run: cd docs && uv run make html
+        run: uv run mkdocs build
 
       - name: Publish documentation to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/build/html/
+          publish_dir: site
           force_orphan: true

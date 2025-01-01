@@ -1,29 +1,30 @@
-# pyprojectsort
+<h1 align="center">pyprojectsort</h1>
+
+<p align="center">
+  <b>Formatter for pyproject.toml files</b>
+</p>
 
 [![PyPI Version](https://badge.fury.io/py/pyprojectsort.svg)](https://pypi.org/project/pyprojectsort/)
 ![LICENSE](https://img.shields.io/badge/license-MIT-blue)
 [![Python versions](https://img.shields.io/pypi/pyversions/pyprojectsort.svg)](https://pypi.org/pypi/pyprojectsort)
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 ![Pipeline status](https://github.com/kieran-ryan/python-package-template/actions/workflows/main.yml/badge.svg)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/kieran-ryan/pyprojectsort/main.svg)](https://results.pre-commit.ci/latest/github/kieran-ryan/pyprojectsort/main)
-
-Formatter for pyproject.toml files.
 
 This package enforces consistent formatting of pyproject.toml files, reducing merge request conflicts and saving time otherwise spent on manual formatting. It also contributes to a cleaner git history and more readable code; enhancing overall project organisation and maintainability. Experience a streamlined workflow, reduced errors, and improved code readability with `pyprojectsort`.
 
 ## Features
 
 - Alphanumerically sorts pyproject.toml by:
-  - section
-  - section key
-  - list value
+    - section
+    - section key
+    - list value
 - Reformats pyproject.toml to a standardised style
-  - line per list value
-  - double quotations
-  - trailing commas
-  - indentation
-  - end of file newline
+    - line per list value
+    - double quotations
+    - trailing commas
+    - indentation
+    - end of file newline
 
 ## Installation
 
@@ -41,7 +42,7 @@ To use as an automated git hook, add this to your `.pre-commit-config.yaml`:
 - repo: https://github.com/kieran-ryan/pyprojectsort
   rev: v0.4.0
   hooks:
-    - id: pyprojectsort
+      - id: pyprojectsort
 ```
 
 ## Examples
