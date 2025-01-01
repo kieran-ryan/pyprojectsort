@@ -59,4 +59,4 @@ jobs:
         run: uv pip install --requirement requirements.txt
 
       - name: Build documentation
-        run: cd docs && uv run make html
+        run: uv run mkdocs build
