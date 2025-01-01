@@ -17,6 +17,7 @@
     "charliermarsh",
     "configfile",
     "cyclomatic",
+    "debugpy",
     "errorlevel",
     "esbenp",
     "furo",
