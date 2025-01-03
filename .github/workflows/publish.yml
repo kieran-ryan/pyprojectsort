@@ -8,16 +8,9 @@ jobs:
   publish-pypi:
     name: Build and publish Python 🐍 distributions 📦 to ${{ matrix.environment.name }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        environment:
-          - name: pypi
-            url: https://pypi.org/project/pyprojectsort
-            token: PYPI_API_TOKEN
-            repository-url: https://upload.pypi.org/legacy/
     environment:
-      name: ${{ matrix.environment.name }}
-      url: ${{ matrix.environment.url }}
+      name: pypi
+      url: https://pypi.org/project/pyprojectsort
     permissions:
       id-token: write
     steps:
@@ -28,11 +21,11 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Build distribution 📦
+      - name: Build distribution
         run: uv build
 
-      - name: Publish distribution 📦 to ${{ matrix.environment.name }}
-        run: uv publish --index ${{ matrix.environment.repository-url }} --token ${{ secrets[matrix.environment.token] }}
+      - name: Publish distribution to PyPI
+        run: uv publish
 
   publish-docs:
     name: Build documentation and deploy to GitHub Pages
