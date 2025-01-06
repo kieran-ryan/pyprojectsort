@@ -10,6 +10,7 @@
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
 ![Pipeline status](https://github.com/kieran-ryan/python-package-template/actions/workflows/main.yml/badge.svg)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/kieran-ryan/pyprojectsort/main.svg)](https://results.pre-commit.ci/latest/github/kieran-ryan/pyprojectsort/main)
+[![codecov](https://codecov.io/gh/kieran-ryan/pyprojectsort/graph/badge.svg?token=MNGM4NAXEB)](https://codecov.io/gh/kieran-ryan/pyprojectsort)
 
 This package enforces consistent formatting of pyproject.toml files, reducing merge request conflicts and saving time otherwise spent on manual formatting. It also contributes to a cleaner git history and more readable code; enhancing overall project organisation and maintainability. Experience a streamlined workflow, reduced errors, and improved code readability with `pyprojectsort`.
 
