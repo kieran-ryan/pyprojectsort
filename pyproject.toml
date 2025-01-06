@@ -96,7 +96,7 @@ ignore = [
 recursive = true
 
 [tool.pytest.ini_options]
-addopts = "--doctest-modules -rA --verbose"
+addopts = "--doctest-modules -rA --verbose --junitxml=junit.xml -o junit_family=legacy"
 testpaths = [
     "pyprojectsort",
     "tests",
