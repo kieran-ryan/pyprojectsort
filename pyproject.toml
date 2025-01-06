@@ -53,7 +53,7 @@ Source = "https://github.com/kieran-ryan/pyprojectsort"
 Tracker = "https://github.com/kieran-ryan/pyprojectsort/issues"
 
 [tool.coverage.html]
-directory = "docs/coverage"
+directory = ".reports"
 
 [tool.coverage.report]
 fail_under = 75.0
@@ -67,7 +67,7 @@ omit = [
 ]
 
 [tool.coverage.xml]
-output = "docs/coverage/coverage.xml"
+output = ".reports/coverage.xml"
 
 [tool.flit.module]
 name = "pyprojectsort"

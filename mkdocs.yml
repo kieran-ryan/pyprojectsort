@@ -1,9 +1,10 @@
 site_name: pyprojectsort
+docs_dir: .
 site_url: https://kieran-ryan.github.io/pyprojectsort
 theme:
   name: material
   palette:
-    - scheme: slate
+    scheme: slate
 
   features:
     - toc.integrate
@@ -19,3 +20,6 @@ extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/kieran-ryan/pyprojectsort
+
+plugins:
+  - same-dir

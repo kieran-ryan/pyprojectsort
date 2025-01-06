@@ -16,15 +16,15 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
 ## Features
 
 - Alphanumerically sorts pyproject.toml by:
-    - section
-    - section key
-    - list value
+  - section
+  - section key
+  - list value
 - Reformats pyproject.toml to a standardised style
-    - line per list value
-    - double quotations
-    - trailing commas
-    - indentation
-    - end of file newline
+  - line per list value
+  - double quotations
+  - trailing commas
+  - indentation
+  - end of file newline
 
 ## Installation
 
@@ -42,7 +42,7 @@ To use as an automated git hook, add this to your `.pre-commit-config.yaml`:
 - repo: https://github.com/kieran-ryan/pyprojectsort
   rev: v0.4.0
   hooks:
-      - id: pyprojectsort
+    - id: pyprojectsort
 ```
 
 ## Examples
@@ -145,6 +145,10 @@ authors = [
 - { name = "Author Name" },
 ]
 ```
+
+## Contributing
+
+Contributions are welcome for `pyprojectsort`, and can be made by raising [issues](https://github.com/kieran-ryan/pyprojectsort/issues) or [pull requests](https://github.com/kieran-ryan/pyprojectsort/pulls).
 
 ## License
 
