@@ -15,6 +15,7 @@
     "BUILDDIR",
     "buildapi",
     "charliermarsh",
+    "codecov",
     "configfile",
     "cyclomatic",
     "errorlevel",

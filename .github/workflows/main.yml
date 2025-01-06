@@ -66,6 +66,13 @@ jobs:
           path: docs/coverage
           retention-days: 5
 
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@v5
+        with:
+          files: docs/coverage/coverage.xml
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   build-docs:
     runs-on: ${{ matrix.os }}
     continue-on-error: true
