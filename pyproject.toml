@@ -56,6 +56,10 @@ Tracker = "https://github.com/kieran-ryan/pyprojectsort/issues"
 directory = ".reports"
 
 [tool.coverage.report]
+exclude_lines = [
+    "if typing.TYPE_CHECKING:",
+    "if __name__ == \"__main__\":",
+]
 fail_under = 75.0
 show_missing = true
 
