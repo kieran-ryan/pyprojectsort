@@ -17,15 +17,15 @@ This package enforces consistent formatting of pyproject.toml files, reducing me
 ## Features
 
 - Alphanumerically sorts pyproject.toml by:
-  - section
-  - section key
-  - list value
+    - section
+    - section key
+    - list value
 - Reformats pyproject.toml to a standardised style
-  - line per list value
-  - double quotations
-  - trailing commas
-  - indentation
-  - end of file newline
+    - line per list value
+    - double quotations
+    - trailing commas
+    - indentation
+    - end of file newline
 
 ## Installation
 
@@ -43,7 +43,7 @@ To use as an automated git hook, add this to your `.pre-commit-config.yaml`:
 - repo: https://github.com/kieran-ryan/pyprojectsort
   rev: v0.4.0
   hooks:
-    - id: pyprojectsort
+      - id: pyprojectsort
 ```
 
 ## Examples
@@ -150,6 +150,16 @@ authors = [
 ## Contributing
 
 Contributions are welcome for `pyprojectsort`, and can be made by raising [issues](https://github.com/kieran-ryan/pyprojectsort/issues) or [pull requests](https://github.com/kieran-ryan/pyprojectsort/pulls).
+
+Using [`uv`](https://docs.astral.sh/uv/getting-started/installation/#pypi) for package and project management is encouraged when developing with the project - though not required. You will typically want to use the below commands within the project during development.
+
+```console
+uv run pytest              # Run the tests
+uv run pre-commit          # Run the linting checks on staged changes
+uv run pre-commit install  # Run the linting checks on commit
+uv run mkdocs serve        # Build the documentation
+uv build                   # Build the package
+```
 
 ## License
 

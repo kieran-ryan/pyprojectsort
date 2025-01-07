@@ -34,9 +34,6 @@ jobs:
       - name: Install uv and set the Python version
         uses: astral-sh/setup-uv@v5
 
-      - name: Install documentation dependencies
-        run: uv pip install --requirement requirements.txt
-
       - name: Build documentation
         run: uv run mkdocs build
 
