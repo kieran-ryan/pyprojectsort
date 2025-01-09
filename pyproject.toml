@@ -92,7 +92,7 @@ output = ".reports/coverage.xml"
 name = "pyprojectsort"
 
 [tool.pytest.ini_options]
-addopts = "--doctest-modules -rA --verbose --junitxml=junit.xml -o junit_family=legacy --cov-report=term --cov-report=html --cov-report=xml --cov=pyprojectsort"
+addopts = "--doctest-modules -rA --verbose --junitxml=.reports/junit.xml -o junit_family=legacy --cov-report=term --cov-report=html --cov-report=xml --cov=pyprojectsort"
 testpaths = [
     "pyprojectsort",
     "tests",
