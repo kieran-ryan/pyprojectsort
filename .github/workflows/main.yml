@@ -3,98 +3,48 @@ name: main
 on: [push, pull_request]
 
 jobs:
-  static-analysis:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        python-version: ["3.10"]
-        os: [ubuntu-latest]
-    name: Static Analysis
-    steps:
-      - name: Set up Python ${{ matrix.python-version }} on ${{ matrix.os }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - uses: actions/checkout@v2
-        with:
-          submodules: recursive
-      - name: Install lint dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install --requirement requirements-dev.txt
-      - name: Check Python formatting
-        run: black . --check
-      - name: Lint Python code
-        run: ruff .
-      - name: Check pyproject.toml formatting
-        run: pyprojectsort --check
-      - name: Check cyclomatic complexity
-        run: radon cc .
-      - name: Check maintainability index
-        run: radon mi .
-      - name: Check spelling
-        uses: streetsidesoftware/cspell-action@v2
-      - name: Check security issues
-        run: bandit --configfile=pyproject.toml --severity-level=medium --recursive .
-      - name: Check performance issues
-        run: perflint .
-
   run-tests:
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os: [macos-latest, windows-latest, ubuntu-latest]
 
     runs-on: ${{ matrix.os }}
     name: Test with Python ${{ matrix.python-version }} on ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+
+      - name: Install uv and set the Python version as ${{ matrix.python-version }}
+        uses: astral-sh/setup-uv@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install test dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install --requirement requirements-test.txt
+
       - name: Run tests
-        run: make coverage
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-coverage-report
-          path: docs/coverage
-          retention-days: 5
+        run: uv run pytest
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
-          files: docs/coverage/coverage.xml
+          files: .reports/coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1
         with:
+          files: .reports/junit.xml
           token: ${{ secrets.CODECOV_TOKEN }}
 
   build-docs:
-    runs-on: ${{ matrix.os }}
-    continue-on-error: true
-    strategy:
-      matrix:
-        python-version: ["3.10"]
-        os: [ubuntu-latest]
-    name: Build docs with Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    name: Build documentation
+    runs-on: ubuntu-latest
     steps:
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+
+      - name: Install uv and set the Python version
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: ${{ matrix.python-version }}
-      - uses: actions/checkout@v2
-      - name: Install docs dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install --requirement requirements-docs.txt
-      - name: Build docs
-        run: make docs
+          python-version: "3.10"
+
+      - name: Build documentation
+        run: uv run mkdocs build

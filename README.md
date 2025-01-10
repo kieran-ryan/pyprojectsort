@@ -1,31 +1,31 @@
-# pyprojectsort
+<h1 align="center">pyprojectsort</h1>
+
+<p align="center">
+  <b>Formatter for pyproject.toml files</b>
+</p>
 
 [![PyPI Version](https://badge.fury.io/py/pyprojectsort.svg)](https://pypi.org/project/pyprojectsort/)
 ![LICENSE](https://img.shields.io/badge/license-MIT-blue)
 [![Python versions](https://img.shields.io/pypi/pyversions/pyprojectsort.svg)](https://pypi.org/pypi/pyprojectsort)
 ![Supported platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 ![Pipeline status](https://github.com/kieran-ryan/python-package-template/actions/workflows/main.yml/badge.svg)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/kieran-ryan/pyprojectsort/main.svg)](https://results.pre-commit.ci/latest/github/kieran-ryan/pyprojectsort/main)
-
-Formatter for pyproject.toml files.
+[![codecov](https://codecov.io/gh/kieran-ryan/pyprojectsort/graph/badge.svg?token=MNGM4NAXEB)](https://codecov.io/gh/kieran-ryan/pyprojectsort)
 
 This package enforces consistent formatting of pyproject.toml files, reducing merge request conflicts and saving time otherwise spent on manual formatting. It also contributes to a cleaner git history and more readable code; enhancing overall project organisation and maintainability. Experience a streamlined workflow, reduced errors, and improved code readability with `pyprojectsort`.
 
 ## Features
 
 - Alphanumerically sorts pyproject.toml by:
-  - section
-  - section key
-  - list value
+    - section
+    - section key
+    - list value
 - Reformats pyproject.toml to a standardised style
-  - line per list value
-  - double quotations
-  - trailing commas
-  - indentation
-  - end of file newline
+    - line per list value
+    - double quotations
+    - trailing commas
+    - indentation
+    - end of file newline
 
 ## Installation
 
@@ -41,9 +41,9 @@ To use as an automated git hook, add this to your `.pre-commit-config.yaml`:
 
 ```yaml
 - repo: https://github.com/kieran-ryan/pyprojectsort
-  rev: v0.3.0
+  rev: v0.4.0
   hooks:
-    - id: pyprojectsort
+      - id: pyprojectsort
 ```
 
 ## Examples
@@ -145,6 +145,20 @@ authors = [
   { name = "Kieran Ryan" },
 - { name = "Author Name" },
 ]
+```
+
+## Contributing
+
+Contributions are welcome for `pyprojectsort`, and can be made by raising [issues](https://github.com/kieran-ryan/pyprojectsort/issues) or [pull requests](https://github.com/kieran-ryan/pyprojectsort/pulls).
+
+Using [`uv`](https://docs.astral.sh/uv/getting-started/installation/#pypi) for package and project management is encouraged when developing with the project - though not required. You will typically want to use the below commands within the project during development.
+
+```console
+uv run pytest              # Run the tests
+uv run pre-commit          # Run the linting checks on staged changes
+uv run pre-commit install  # Run the linting checks on commit
+uv run mkdocs serve        # Build the documentation
+uv build                   # Build the package
 ```
 
 ## License

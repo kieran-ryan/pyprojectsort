@@ -83,6 +83,14 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 junit.xml
+.reports/
+docs/
+
+# Ruff linting - for IDE highlighting - as internals already ignored
+.ruff_cache/
+
+# Node modules - for IDE highlighting - as internals already ignored
+node_modules/
 
 # Translations
 *.mo
