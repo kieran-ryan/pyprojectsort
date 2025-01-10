@@ -5,14 +5,9 @@ on:
     types: [published]
 
 jobs:
-  publish-pypi:
-    name: Build and publish Python 🐍 distributions 📦 to ${{ matrix.environment.name }}
+  build:
+    name: Build package
     runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/project/pyprojectsort
-    permissions:
-      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -21,6 +16,30 @@ jobs:
 
       - name: Build distribution
         run: uv build
+
+      - name: Upload artifact
+        id: artifact-upload-step
+        uses: actions/upload-artifact@v4
+        with:
+          name: distribution
+          path: dist/*
+          if-no-files-found: error
+          compression-level: 0 # They are already compressed
+
+  publish-pypi:
+    name: Publish package to ${{ matrix.environment.name }}
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/pyprojectsort
+    permissions:
+      id-token: write
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: distribution
+          path: dist/
 
       - name: Publish distribution to PyPI
         run: uv publish
