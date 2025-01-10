@@ -67,7 +67,8 @@ Source = "https://github.com/kieran-ryan/pyprojectsort"
 Tracker = "https://github.com/kieran-ryan/pyprojectsort/issues"
 
 [tool.coverage.html]
-directory = ".reports"
+directory = ".reports/coverage"
+show_contexts = true
 
 [tool.coverage.report]
 exclude_lines = [
@@ -98,7 +99,7 @@ testpaths = [
 ]
 
 [tool.ruff]
-target-version = "py37"
+target-version = "py38"
 
 [tool.ruff.lint]
 ignore = [
