@@ -165,19 +165,16 @@ def main() -> None:
         print("Use of 'check' with 'diff' is redundant. Please use one or the other.")
         sys.exit(1)
 
-    pyproject_toml: str = _parse_pyproject_toml(pyproject_file)
-    pyproject: dict = tomllib.loads(pyproject_toml)
-    reformatted_pyproject: dict = reformat_pyproject(pyproject)
-    reformatted_pyproject_toml: str = tomli_w.dumps(reformatted_pyproject)
+    text: str = _parse_pyproject_toml(pyproject_file)
+    toml: dict = tomllib.loads(text)
+    toml_reformatted: dict = reformat_pyproject(toml)
+    text_reformatted: str = tomli_w.dumps(toml_reformatted)
 
-    will_reformat = _check_format_needed(pyproject_toml, reformatted_pyproject_toml)
+    will_reformat = _check_format_needed(text, text_reformatted)
 
     if args.diff:
         if will_reformat:
-            for line in unified_diff(
-                pyproject_toml.split("\n"),
-                reformatted_pyproject_toml.split("\n"),
-            ):
+            for line in unified_diff(text.split("\n"), text_reformatted.split("\n")):
                 print(line)
             print(f"\n'{args.file}' would be reformatted")
             sys.exit(1)
@@ -193,7 +190,7 @@ def main() -> None:
         return
 
     if will_reformat:
-        _save_pyproject(pyproject_file, reformatted_pyproject)
+        _save_pyproject(pyproject_file, toml_reformatted)
         print(f"Reformatted '{args.file}'")
         sys.exit(1)
 
