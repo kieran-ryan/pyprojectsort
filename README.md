@@ -153,13 +153,13 @@ Contributions are welcome for `pyprojectsort`, and can be made by raising [issue
 
 Using [`uv`](https://docs.astral.sh/uv/getting-started/installation/#pypi) for package and project management is encouraged when developing with the project - though not required. You will typically want to use the below commands within the project during development.
 
-```console
-uv run pytest              # Run the tests
-uv run pre-commit          # Run the linting checks on staged changes
-uv run pre-commit install  # Run the linting checks on commit
-uv run mkdocs serve        # Build the documentation
-uv build                   # Build the package
-```
+| Command                   | Purpose                                     |
+| ------------------------- | ------------------------------------------- |
+| uv run pytest             | 🧪 Run the tests                            |
+| uv run pre-commit         | 🔎 Run the linting checks on staged changes |
+| uv run pre-commit install | 🕵️‍♀️ Run the linting checks on commit         |
+| uv run mkdocs serve       | 📄 Build the documentation                  |
+| uv build                  | 📦 Build the package                        |
 
 ## License
 
