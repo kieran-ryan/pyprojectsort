@@ -134,7 +134,3 @@ default-groups = [
     "lint",
     "test",
 ]
-
-[tool.uv.build-backend]
-module-name = "pyprojectsort"
-module-root = "."
