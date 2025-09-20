@@ -8,8 +8,8 @@ import unittest.mock
 from io import StringIO
 
 import pytest
+from packaging.version import InvalidVersion, Version
 
-from pyprojectsort import __version__
 from pyprojectsort.main import (
     _check_format_needed,
     _read_cli,
@@ -48,7 +48,10 @@ def test_version():
         _read_cli(["--version"])
 
     assert version.value.code == 0
-    assert output.text == __version__
+    try:
+        Version(output.text)
+    except InvalidVersion:
+        pytest.fail(f"Invalid version: {output.text}")
 
 
 def test_invalid_config_file_path():

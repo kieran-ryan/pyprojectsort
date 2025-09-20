@@ -7,9 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
-### Changed
+### Removed
 
 - Drop support for end-of-life Python 3.7
+- Drop internal `__version__` module in favour of `importlib.metadata`
 
 ## 0.4.0 - 2024-12-31
 

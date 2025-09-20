@@ -1,7 +1,7 @@
 [build-system]
-build-backend = "flit_core.buildapi"
+build-backend = "uv_build"
 requires = [
-    "flit_core >=2,<4",
+    "uv_build>=0.8.4,<0.9.0",
 ]
 
 [dependency-groups]
@@ -13,8 +13,7 @@ lint = [
     "pre-commit==3.3.3",
 ]
 test = [
-    "packaging==23.1",
-    "pyprojectsort",
+    "packaging>=23.1",
     "pytest-cov==4.1.0",
     "pytest==7.4.0",
 ]
@@ -43,9 +42,6 @@ dependencies = [
     "tomli>=2.0.1,<3",
 ]
 description = "Formatter for pyproject.toml files"
-dynamic = [
-    "version",
-]
 keywords = [
     "formatter",
     "pyproject",
@@ -53,6 +49,7 @@ keywords = [
 name = "pyprojectsort"
 readme = "README.md"
 requires-python = ">=3.8"
+version = "0.4.0"
 
 [project.license]
 file = "LICENSE"
@@ -87,9 +84,6 @@ omit = [
 
 [tool.coverage.xml]
 output = ".reports/coverage.xml"
-
-[tool.flit.module]
-name = "pyprojectsort"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules -rA --verbose --junitxml=.reports/junit.xml -o junit_family=legacy --cov-report=term --cov-report=html --cov-report=xml --cov=pyprojectsort"
@@ -141,5 +135,6 @@ default-groups = [
     "test",
 ]
 
-[tool.uv.sources.pyprojectsort]
-workspace = true
+[tool.uv.build-backend]
+module-name = "pyprojectsort"
+module-root = "."

@@ -6,13 +6,12 @@ import argparse
 import pathlib
 import sys
 from difflib import unified_diff
+from importlib.metadata import version
 from typing import Any
 
 import natsort
 import tomli as tomllib
 import tomli_w
-
-from . import __version__
 
 DEFAULT_CONFIG = "pyproject.toml"
 
@@ -84,7 +83,7 @@ def _read_cli(args: list) -> argparse.Namespace:
     parser.add_argument(
         "--version",
         action="version",
-        version=__version__,
+        version=version("pyprojectsort"),
         help="show package version and exit",
     )
     parser.add_argument(
