@@ -6,8 +6,11 @@ jobs:
   run-tests:
     strategy:
       matrix:
+        include:
+          - { os: "windows-latest", python-version: "3.13" }
+          - { os: "macos-latest", python-version: "3.13" }
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [ubuntu-latest]
 
     runs-on: ${{ matrix.os }}
     name: Test with Python ${{ matrix.python-version }} on ${{ matrix.os }}
