@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -22,13 +22,13 @@ repos:
       - id: removestar
         args: [--in-place, pyprojectsort]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.9.10"
+    rev: "v0.14.0"
     hooks:
       - id: ruff
         args: [--fix]
       - id: ruff-format
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v8.17.3
+    rev: v9.2.0
     hooks:
       - id: cspell
   - repo: https://github.com/pre-commit/mirrors-prettier
