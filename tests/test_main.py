@@ -353,3 +353,18 @@ def test_diff_option_reformat_not_needed(
 def test_check_format_needed(original, reformatted, expected_result):
     """Test _check_format_needed function with different test cases."""
     assert _check_format_needed(original, reformatted) == expected_result
+
+
+def test_main_with_invalid_toml_prints_clean_error(tmp_path):
+    """Invalid TOML exits 1 with a clean error instead of a traceback."""
+    bad_file = tmp_path / "pyproject.toml"
+    bad_file.write_text("[unclosed", encoding="utf-8")
+    args = CLIArgs(file=str(bad_file))
+
+    with unittest.mock.patch("pyprojectsort.main._read_cli", return_value=args):
+        with pytest.raises(SystemExit) as exited, OutputCapture() as output:
+            main()
+
+    assert exited.value.code == 1
+    assert "Error parsing" in output.text
+    assert str(bad_file) in output.text

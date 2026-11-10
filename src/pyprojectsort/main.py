@@ -165,7 +165,11 @@ def main() -> None:
         sys.exit(1)
 
     text: str = _parse_pyproject_toml(pyproject_file)
-    toml: dict = tomllib.loads(text)
+    try:
+        toml: dict = tomllib.loads(text)
+    except tomllib.TOMLDecodeError as e:
+        print(f"Error parsing '{args.file}': {e}")
+        sys.exit(1)
     toml_reformatted: dict = reformat_pyproject(toml)
     text_reformatted: str = tomli_w.dumps(toml_reformatted)
 
